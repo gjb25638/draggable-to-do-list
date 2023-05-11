@@ -1,11 +1,37 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    }
-  ]
+  "compilerOptions": {
+    "outDir": "./ts-dist",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+		"jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": ".",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+		"paths": {
+				"@/*": ["src/*"]
+		},
+		"types": ["unplugin-icons/types/vue"]
+  },
+	"types": [
+		"node",
+		"vite/client",
+		"element-plus/global",
+		"unplugin-vue-define-options"
+	],
+	"typeRoots": ["./node_modules/@types/", "./types"],
+  "include": ["config/**/*.ts", "src/**/*", "types/**/*.d.ts"],
+  "exclude": ["dist", "node_modules"]
 }
