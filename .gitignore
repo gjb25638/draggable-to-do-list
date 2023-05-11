@@ -28,3 +28,5 @@ stats.html
 
 # lock files
 pnpm-lock.yaml
+.eslintrc-auto-import.json
+src/auto-imports.d.ts

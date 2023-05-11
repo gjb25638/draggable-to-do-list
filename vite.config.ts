@@ -13,8 +13,7 @@ export default defineConfig((config)=>{
       proxy: {
         // 選項寫法
         '/api': {
-          target: 'http://192.168.85.91:8471', // 高雄
-          // target: 'http://10.0.101.145:38821', // 台北 lab 互通高雄主機需連vpn
+          target: '',
           ws: true,
           changeOrigin: true
         }
