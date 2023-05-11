@@ -1,3 +1,18 @@
 {
-  "recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
+	"recommendations": [
+		"vue.volar",
+		"lokalise.i18n-ally",
+		"christian-kohler.path-intellisense",
+		"vscode-icons-team.vscode-icons",
+		"stylelint.vscode-stylelint",
+		"voorjaar.windicss-intellisense",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"rvest.vs-code-prettier-eslint",
+		"mikestead.dotenv",
+		"eamodio.gitlens",
+		"antfu.iconify",
+		"alefragnani.project-manager",
+		"ms-vscode-remote.remote-wsl"
+	]
 }
