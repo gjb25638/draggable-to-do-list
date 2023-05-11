@@ -41,7 +41,7 @@ function getDirs(path) {
   }
   return findDir(path, [])
 }
-const pathName = resolve('src/store/modules')
+const pathName = resolve('src/stores/modules')
 const dirs = [
   // 把 store 設定套入到 unplugin-auto-import
   ...getDirs(pathName),
