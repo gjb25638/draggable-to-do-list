@@ -1,4 +1,3 @@
-import sysConfig from '@/config'
 import tool from '@/utils/tool'
 import { createI18n } from 'vue-i18n'
 import el_zh_tw from 'element-plus/lib/locale/lang/zh-tw'
@@ -32,7 +31,7 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  locale: tool.data.get('APP_LANG') || sysConfig.LANG,
+  locale: tool.data.get('APP_LANG') || 'zh-tw',
   fallbackLocale: 'zh-tw',
   globalInjection: true,
   messages,
