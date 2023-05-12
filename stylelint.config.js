@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   extends: [
     'stylelint-config-recommended-vue',
-    'stylelint-config-prettier',
+    'stylelint-config-standard',
   ],
   plugins: [
     'stylelint-order'

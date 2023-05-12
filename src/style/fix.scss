@@ -1,0 +1,136 @@
+/* 覆蓋element-plus樣式 */
+.el-menu {
+  border: none !important;
+
+  @apply w-full;
+}
+.el-menu .el-menu-item { @apply w-full; }
+.el-menu .el-menu-item a { position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; text-decoration: none; color: inherit; }
+
+.el-menu .el-menu-item .el-menu-tooltip__trigger {
+  @apply relative;
+}
+.el-form-item-msg { clear: both; width: 100%; font-size: 12px; color: #999; }
+.el-container { height: calc(100% - 58px); }
+.el-aside { border-right: 1px solid #e6e6e6; background: #fff; }
+.el-header { display: flex; justify-content: space-between; align-items: center; padding: 13px 15px; }
+.el-header .left-panel { display: flex; align-items: center; }
+.el-header .right-panel { display: flex; align-items: center; }
+.el-header .right-panel > * + * { margin-left: 10px; }
+.el-footer { padding: 13px 15px; background: #fff; border-top: 1px solid #e6e6e6; }
+.el-main { padding: 15px; }
+.el-main.nopadding { padding: 0; }
+.el-drawer__body { overflow: auto; padding: 0; }
+.el-overlay.modal { background-color: transparent; }
+.el-overlay.modal .el-drawer { background-color: transparent; }
+.el-popconfirm__main { margin: 14px 0; }
+.el-card__header { padding: 15px 20px 0; font-size: 17px; font-weight: bold; border-bottom: 0; }
+.el-dialog__title { font-size: 17px; font-weight: bold; }
+.el-drawer__header > :first-child { font-size: 17px; font-weight: bold; }
+.el-tree.menu .el-tree-node__content { height: 36px; }
+.el-tree.menu .el-tree-node__content .el-tree-node__label .icon { margin-right: 5px; }
+.el-progress__text { font-size: 12px !important; }
+.el-progress__text i { font-size: 14.4px !important; }
+.el-step.is-horizontal .el-step__line { height: 1px; }
+.el-step__title { font-size: 14px; }
+.drawerBG { background: #f6f8f9; }
+.el-button + .el-dropdown { margin-left: 10px; }
+.el-button-group + .el-dropdown { margin-left: 10px; }
+.el-tag + .el-tag { margin-left: 10px; }
+.el-button-group + .el-button-group { margin-left: 10px; }
+.el-tabs__nav-wrap::after { height: 1px; }
+.el-table th.is-sortable { transition: 0.1s; }
+.el-table th.is-sortable:hover { background: #eee; }
+.el-col .el-card { margin-bottom: 15px; }
+.el-main { flex-basis: 100%; }
+.el-main > .scTable .el-table--border::before { display: none; }
+.el-main > .scTable .el-table--border::after { display: none; }
+.el-main > .scTable .el-table--border .el-table__inner-wrapper::after { display: none; }
+.el-main > .scTable .el-table__border-left-patch { display: none; }
+.el-table.el-table--large { font-size: 14px; }
+
+.el-table {
+	overflow: hidden;
+	font-size: 12px; color: white;
+}
+
+.el-table th.el-table__cell.is-leaf{
+	border-top: var(--el-table-border);
+
+	&:first-child {
+		border-left: var(--el-table-border);
+
+	}
+}
+
+.el-table td.el-table__cell {
+	&:first-child {
+		border-left: var(--el-table-border);
+
+	}
+}
+
+
+.el-table__header tr:last-child th:first-child {
+    overflow: hidden;
+    border-radius: 20px 0 0;
+}
+
+.el-table__header tr {
+		th:first-child {
+			overflow: hidden;
+			border-radius: 20px 0 0;
+		}
+
+		th:last-child {
+			overflow: hidden;
+			border-radius: 0 20px 0 0;
+		}
+}
+
+.el-table__body {
+	tr:last-child {
+		td:first-child {
+			overflow: hidden;
+			border-radius: 0 0 0 20px;
+		}
+
+		td:last-child {
+			overflow: hidden;
+			border-radius: 0 0 20px;
+		}
+	}
+}
+
+/* 動態值 */
+.aminui-side .el-menu-item.is-active {
+  background: var(--el-menu-active-bg-color);
+}
+
+.aminui-side-split li.active { background-color: var(--el-color-primary); }
+.adminui-tags li:hover { background-color: var(--el-color-primary-light-9); }
+.adminui-tags li.active { background-color: var(--el-color-primary) !important; }
+.contextmenu li:hover { color: var(--el-color-primary-light-2) !important; background-color: var(--el-color-primary-light-9) !important; }
+.data-box .item-background { background-color: var(--el-color-primary) !important; }
+
+.layout-setting,
+.diy-grid-setting { background-color: var(--el-color-primary) !important; }
+
+/* 覆蓋tinymce樣式 */
+.sceditor .tox-tinymce { border: 1px solid #dcdfe6; }
+.sceditor .tox .tox-statusbar { border-top: 1px solid #dcdfe6; }
+.sceditor .tox .tox-toolbar__primary { background: #f6f8f9; border-bottom: 1px solid #dcdfe6; }
+
+.el-select__tags {
+  left: 5px;
+}
+
+/* 修改inputt自動填入帶底色 */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    &, &:hover, &:focus, &:active{
+        /* stylelint-disable-next-line property-no-vendor-prefix */
+        -webkit-background-clip: text;
+    }
+}

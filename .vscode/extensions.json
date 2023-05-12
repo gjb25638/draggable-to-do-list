@@ -13,6 +13,8 @@
 		"eamodio.gitlens",
 		"antfu.iconify",
 		"alefragnani.project-manager",
-		"ms-vscode-remote.remote-wsl"
+		"ms-vscode-remote.remote-wsl",
+		"pranaygp.vscode-css-peek",
+		"Zignd.html-css-class-completion",
 	]
 }
