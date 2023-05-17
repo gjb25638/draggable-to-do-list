@@ -1,40 +1,75 @@
 <template>
   <div class="home">
-    <div class="menu">
-      <div
-        v-for="item in menu"
-        :key="item.name"
-        class="item"
-      >
-        <div class="btn">
-          <div class="title">
-            {{ item.title }}
-          </div>
-        </div>
+    <div class="home__header">
+      <AddItemBtn
+        :item="'board'"
+        @add-item="addBoard"
+      />
+    </div>
+    <div class="home__body">
+      <div class="board-list">
+        <draggable
+          class="list-group"
+          :list="boardList"
+          item-key="boardTitle"
+        >
+          <template #item="{ element }">
+            <Board
+              :board-data="element"
+            />
+          </template>
+        </draggable>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const menu = [{ name: 'new', title: '新遊戲' }, { name: 'read', title: '讀取存檔' }, { name: 'option', title: '遊戲選項' }
-]
+import AddItemBtn from '@/components/addItemBtn.vue'
+import Board from '@/components/board.vue'
+import draggable from 'vuedraggable'
+
+const boardList = reactive([
+  {
+    boardTitle: '代辦',
+    taskList: [
+      { taskTitle: '資源回收', id: 1 },
+      { taskTitle: '掃廁所', id: 2 },
+      { taskTitle: '拖地板', id: 3 }
+    ]
+  },
+  {
+    boardTitle: '完成事項',
+    taskList: [
+      { taskTitle: '資源回收', id: 1 },
+      { taskTitle: '掃廁所', id: 2 },
+      { taskTitle: '拖地板', id: 3 }
+    ]
+  }
+])
+
+const addBoard = (props) => {
+  boardList.push({
+    boardTitle: props,
+    taskList: []
+  })
+}
 </script>
 
 <style lang="scss" scoped>
 .home {
-  @apply w-full h-100vh center bg-black;
+  @apply w-full h-100vh bg-[#B5C6B5];
 
-  .menu {
-    @apply flex flex-col;
+  .home__header {
+    @apply flex;
+  }
 
-    .item {
-      .btn {
-        @apply center p-10px b-1 b-solid b-blue-500 rounded-2;
+  .home__body {
+    .board-list {
+      @apply w-full flex;
 
-        .title {
-          @apply c-red-500;
-        }
+      .list-group {
+        @apply flex;
       }
     }
   }
