@@ -41,7 +41,7 @@ const hideAddItem = () => isShowAddItem.value = false
 
 <style lang="scss" scoped>
 .addItemBtn {
-  @apply w-full;
+  @apply ;
 
   .addItemBtn__btn {
     @apply ;

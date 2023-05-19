@@ -3,7 +3,7 @@
     "outDir": "./ts-dist",
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": true,
@@ -33,5 +33,14 @@
 	],
 	"typeRoots": ["./node_modules/@types/", "./types"],
   "include": ["config/**/*.ts", "src/**/*", "types/**/*.d.ts"],
+  // "include": [
+  //   "config/**/*.ts", 
+  //   "types/**/*.d.ts", 
+  //   "src/**/*.ts", 
+  //   "src/**/*.d.ts" , 
+  //   "src/**/*.tsx", 
+  //   "src/**/*.vue",
+  //   "*.d.ts"
+  // ],
   "exclude": ["dist", "node_modules"]
 }

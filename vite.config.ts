@@ -7,7 +7,7 @@ export default defineConfig((config)=>{
   const { mode } = config
   return {
     server: {
-      open: true,
+      open: false,
       port: 2800,
       host: '0.0.0.0',
       proxy: {
@@ -15,7 +15,7 @@ export default defineConfig((config)=>{
         '/api': {
           target: '',
           ws: true,
-          changeOrigin: true
+          changeOrigin: true,
         }
       }
     },

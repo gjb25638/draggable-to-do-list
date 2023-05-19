@@ -30,3 +30,6 @@ stats.html
 pnpm-lock.yaml
 .eslintrc-auto-import.json
 src/auto-imports.d.ts
+
+# firebase key
+trello-to-do-list-firebase-adminsdk-5capb-0d4097bef5.json

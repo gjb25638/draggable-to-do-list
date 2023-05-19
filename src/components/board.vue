@@ -2,7 +2,7 @@
   <div class="board">
     <div class="board__header">
       <div class="board__header__title">
-        {{ boardData.boardTitle }}
+        {{ boardData.title }}
       </div>
       <div class="board__header__option">
         <i-material-symbols-more-horiz class="text-20px" />
@@ -13,7 +13,7 @@
         class="list-group"
         :list="boardData.taskList"
         group="people"
-        item-key="taskTitle"
+        item-key="title"
       >
         <template #item="{ element, index }">
           <Task
@@ -24,7 +24,10 @@
       </draggable>
     </div>
     <div class="board__add-task-btn">
-      <AddItemBtn :item="'task'" />
+      <AddItemBtn
+        :item="'task'"
+        @add-item="(props) => $emit('addTask', { boardId: boardData.id, newTaskTitle: props })"
+      />
     </div>
   </div>
 </template>
@@ -36,19 +39,23 @@ import draggable from 'vuedraggable'
 const props = defineProps({
   boardData: {
     type: Object, default: () => ({
-      boardTitle: '代辦',
+      id: 1,
+      title: '代辦',
       taskList: [
-        { taskTitle: '資源回收', id: 1 },
-        { taskTitle: '資源回收', id: 2 }
+        { title: '資源回收', id: 1 },
+        { title: '資源回收', id: 2 }
       ]
     })
   }
 })
+const emit = defineEmits(['addTask'])
 </script>
 
 <style lang="scss" scoped>
 .board {
-  @apply m-10px p-10px bg-white rounded-2;
+  height: fit-content;
+
+  @apply m-10px p-10px bg-[#C6E7C9] rounded-2;
 
   .board__header {
     @apply flex justify-between;

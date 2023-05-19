@@ -4,7 +4,7 @@
       <Chk />
     </div>
     <div class="task__title">
-      {{ taskData.taskTitle }} {{ id }}
+      {{ taskData.title }} {{ id }}
     </div>
     <div class="task__menu">
       <i-material-symbols-more-horiz class="text-20px" />
@@ -18,12 +18,12 @@ const props = defineProps({
   taskData: { type: Object, default: () => ({ taskTitle: '資源回收' }) },
   id: { type: Number, default: 0 }
 })
-const checked1 = ref(false)
+const checked = ref(false)
 </script>
 
 <style lang="scss" scoped>
 .task {
-  @apply flex items-center my-5px p-5px border-1 border-solid border-black rounded-2;
+  @apply flex items-center my-10px p-5px border-1 border-solid border-black rounded-2;
 
 
   .task__title {
