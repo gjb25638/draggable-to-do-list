@@ -1,8 +1,8 @@
-import BoardController from '../controllers/board'
+import BoardController from '../controllers/board.controller'
 import Route from './route'
 
 class BoardRoute extends Route {
-  private boardController = new BoardController()
+  private boardController = new BoardController('board')
 
   constructor() {
     super()
@@ -11,9 +11,9 @@ class BoardRoute extends Route {
   }
 
   protected setRoutes() {
-    this.router.get('/list', this.boardController.list)
-    this.router.post('/add', this.boardController.add)
-    this.router.post('/:board_id/delete', this.boardController.delete)
+    this.router.get('/list', this.boardController.readAll)
+    this.router.post('/add', this.boardController.create)
+    this.router.delete('/:id/delete', this.boardController.delete)
   }
 }
 

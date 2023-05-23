@@ -30,9 +30,13 @@ export const useBoardStore = defineStore('Board', {
       const data = await API.list.get()
       this.boardList = data
     },
-    async addBoard(payload) {
-      const data = await API.add.post(payload)
-      this.boardList = data
+    async addBoard(data) {
+      const payload = { ...data }
+      await API.add.post(payload)
+    },
+    async deleteBoard(data) {
+      const payload = { ...data }
+      await API.delete.delete(payload)
     }
   }
 })

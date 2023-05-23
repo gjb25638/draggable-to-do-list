@@ -14,12 +14,14 @@
     "pretty": "prettier --write \"src/**/*.{css,js,json,vue}\""
   },
   "dependencies": {
+    "@google-cloud/firestore": "^6.6.0",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.7",
     "element-plus": "^2.3.4",
     "express": "^4.18.2",
+    "firebase": "^9.22.0",
     "firebase-admin": "^11.8.0",
     "morgan": "^1.10.0",
     "pinia": "^2.0.35",

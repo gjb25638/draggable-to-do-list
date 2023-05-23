@@ -3,6 +3,7 @@ import ViteExpress from 'vite-express'
 import cors from 'cors'
 import morgan from 'morgan'
 import { router } from './router'
+import errorMiddleware from './middleware/error.middleware'
 
 // const ref = db.collection('board').where('__name__', '==', '1')
 // ref.get().then(querySnapshot => {
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(morgan('dev'))
 // ViteExpress.config({ mode: 'production' })
+
+app.use(errorMiddleware)
 
 // load router
 for (const route of router) {

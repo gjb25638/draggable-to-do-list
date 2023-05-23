@@ -5,11 +5,13 @@
         {{ `${boardData.id} ${boardData.title}` }}
       </div>
       <div class="board__header__option">
-        <el-dropdown trigger="click">
-          <i-material-symbols-more-horiz class="text-20px" />
+        <el-dropdown trigger="hover">
+          <i-material-symbols-more-horiz class="text-20px outline-none" />
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>刪除</el-dropdown-item>
+              <el-dropdown-item @click="$emit('deleteBoard', { boardId: boardData.id })">
+                刪除
+              </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -55,7 +57,7 @@ const props = defineProps({
     })
   }
 })
-const emit = defineEmits(['addTask'])
+const emit = defineEmits(['addTask, deleteBoard'])
 </script>
 
 <style lang="scss" scoped>
@@ -66,10 +68,22 @@ const emit = defineEmits(['addTask'])
 
   .board__header {
     @apply flex justify-between;
+
   }
 
   .board__task-list {
     @apply flex flex-col;
   }
+}
+
+.el-dropdown-menu {
+  @apply top-[-10px] bg-white text-black px-10px py-3px rounded-1 list-none cursor-pointer;
+}
+</style>
+<style lang="scss">
+.el-popper__arrow {
+  transform: rotate(45deg);
+
+  @apply top-[-15px] bg-white w-10px h-10px;
 }
 </style>

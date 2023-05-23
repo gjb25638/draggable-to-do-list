@@ -12,6 +12,7 @@
             <Board
               :board-data="element"
               @add-task="addTask"
+              @delete-board="deleteBoard"
             />
           </template>
         </draggable>
@@ -59,8 +60,13 @@ onMounted(() => {
 //   }
 // ])
 
-const addBoard = (props) => {
-  boardStore.addBoard({ title: props.title })
+const addBoard = async (props) => {
+  await boardStore.addBoard({ title: props.title })
+  boardStore.getBoardList()
+}
+const deleteBoard = async (props) => {
+  await boardStore.deleteBoard({ id: props.boardId })
+  boardStore.getBoardList()
 }
 const addTask = (props) => {
   const boardId = props.boardId

@@ -12,15 +12,15 @@ export default {
   add: {
     url: `${config.API_URL}`,
     name: 'add_board',
-    post: async function(payload) {
-      return await httpReq.post(`${this.url}/board/add`, payload)
+    post: async function(data) {
+      return await httpReq.post(`${this.url}/board/add`, data)
     }
   },
   delete: {
     url: `${config.API_URL}`,
     name: 'delete_board',
-    delete: async function(payload) {
-      return await httpReq.delete(`${this.url}/board/${payload.board_id}/delete`, )
+    delete: async function(data) {
+      return await httpReq.delete(`${this.url}/board/${data.id}/delete`, )
     }
   }
 }

@@ -1,8 +1,8 @@
-import TaskController from '../controllers/task'
+import TaskController from '../controllers/task.controller'
 import Route from './route'
 
 class TaskRoute extends Route {
-  private taskController = new TaskController()
+  private taskController = new TaskController('task')
 
   constructor() {
     super()

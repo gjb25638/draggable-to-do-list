@@ -16,7 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "strictFunctionTypes": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "skipLibCheck": true,

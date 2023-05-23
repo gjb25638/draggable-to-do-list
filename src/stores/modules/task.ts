@@ -25,7 +25,8 @@ export const useTaskStore = defineStore('Task', {
   // },
   actions: {
     async getListByBoardId(board_id) {
-      const taskList = await API.getListByBoardId.get({ board_id })
+      const payload = { board_id }
+      const taskList = await API.getListByBoardId.get(payload)
       console.log({ taskList })
 
       // data.result === 200 && (this.boardList = data.data)
