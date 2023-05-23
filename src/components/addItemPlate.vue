@@ -12,7 +12,7 @@
         :title="`${submitBtnTitle}`"
         :bg-color="'red'"
         class="mr-10px"
-        @click="$emit('addItem', newItemTitle)"
+        @click="$emit('addItem', { title: newItemTitle })"
       />
       <Btn
         :title="'取消'"

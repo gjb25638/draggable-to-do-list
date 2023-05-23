@@ -5,8 +5,8 @@
       <div class="home__contain__board-list">
         <draggable
           class="list-group"
-          :list="boardList"
-          item-key="title"
+          :list="boardStore.getList"
+          item-key="id"
         >
           <template #item="{ element }">
             <Board
@@ -32,9 +32,11 @@ import Board from '@/components/board.vue'
 import draggable from 'vuedraggable'
 
 const boardStore = useBoardStore()
-boardStore.getBoardList()
-
-const boardList = boardStore.boardList
+onMounted(() => {
+  nextTick(() => {
+    boardStore.getBoardList()
+  })
+})
 
 // const boardList = reactive([
 //   {
@@ -58,15 +60,12 @@ const boardList = boardStore.boardList
 // ])
 
 const addBoard = (props) => {
-  boardList.push({
-    id: `${boardList.length + 1}`,
-    title: props,
-  })
+  boardStore.addBoard({ title: props.title })
 }
 const addTask = (props) => {
   const boardId = props.boardId
   const newTaskTitle = props.newTaskTitle
-  const board = boardList.filter((item) => item.id === boardId)
+  const board = boardStore.getList.filter((item) => item.id === boardId)
   // board.taskList.push({ title: newTaskTitle, id: board.taskList.length + 1 })
 }
 </script>

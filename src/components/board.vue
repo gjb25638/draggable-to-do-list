@@ -2,18 +2,25 @@
   <div class="board">
     <div class="board__header">
       <div class="board__header__title">
-        {{ boardData.title }}
+        {{ `${boardData.id} ${boardData.title}` }}
       </div>
       <div class="board__header__option">
-        <i-material-symbols-more-horiz class="text-20px" />
+        <el-dropdown trigger="click">
+          <i-material-symbols-more-horiz class="text-20px" />
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>刪除</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
     </div>
     <div class="board__task-list">
-      <draggable
+      <!-- <draggable
         class="list-group"
         :list="boardData.taskList"
         group="people"
-        item-key="title"
+        item-key="id"
       >
         <template #item="{ element, index }">
           <Task
@@ -21,7 +28,7 @@
             :task-data="element"
           />
         </template>
-      </draggable>
+      </draggable> -->
     </div>
     <div class="board__add-task-btn">
       <AddItemBtn
@@ -41,10 +48,10 @@ const props = defineProps({
     type: Object, default: () => ({
       id: 1,
       title: '代辦',
-      taskList: [
-        { title: '資源回收', id: 1 },
-        { title: '資源回收', id: 2 }
-      ]
+      // taskList: [
+      //   { title: '資源回收', id: 1 },
+      //   { title: '資源回收', id: 2 }
+      // ]
     })
   }
 })

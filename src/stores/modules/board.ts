@@ -12,19 +12,26 @@ interface stateConfig {
 export const useBoardStore = defineStore('Board', {
   state: () : stateConfig => ({
     boardList: [
-      { id: '1', title: '代辦' },
-      { id: '2', title: '完成事項' }
+      // { id: '1', title: '代辦' },
+      // { id: '2', title: '完成事項' }
     ]
   }),
-  // getters: {
-  //   getBoardList: (state) => state.boardList,
-  //   getBoardById: (state) => {
-  //     return (boardId) => state.boardList.find((board) => board.id === boardId)
-  //   }
-  // },
+  getters: {
+    getList: (state): Array<Board> => state.boardList,
+    getBoardById: (state): Board | any => {
+      return (boardId) => state.boardList.find((board) => board.id === boardId)
+    },
+    getLength: (state): number | any => {
+      state.boardList.length
+    }
+  },
   actions: {
     async getBoardList() {
       const data = await API.list.get()
+      this.boardList = data
+    },
+    async addBoard(payload) {
+      const data = await API.add.post(payload)
       this.boardList = data
     }
   }
