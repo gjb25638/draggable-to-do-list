@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "serve": "nodemon src/server/app.ts -w src/server",
+    "serve": "nodemon server/app.ts -w server",
     "start": "NODE_ENV=production ts-node src/server/app.ts",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
