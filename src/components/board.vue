@@ -18,9 +18,9 @@
       </div>
     </div>
     <div class="board__task-list">
-      <!-- <draggable
+      <draggable
         class="list-group"
-        :list="boardData.taskList"
+        :list="taskList"
         group="people"
         item-key="id"
       >
@@ -30,7 +30,7 @@
             :task-data="element"
           />
         </template>
-      </draggable> -->
+      </draggable>
     </div>
     <div class="board__add-task-btn">
       <AddItemBtn
@@ -58,6 +58,17 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['addTask, deleteBoard'])
+// const addTask = (props) => {
+
+// }
+
+const taskStore = useTaskStore()
+onMounted(() => {
+  nextTick(() => {
+    taskStore.getTaskListByBoardId(props.boardData.id)
+  })
+})
+const taskList = computed(() => taskStore.getTasksByBoardId(props.boardData.id))
 </script>
 
 <style lang="scss" scoped>

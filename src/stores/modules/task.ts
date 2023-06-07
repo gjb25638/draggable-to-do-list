@@ -1,7 +1,8 @@
 import API from '@/stores/api/task'
 
 interface Task {
-  id: number,
+  boardId: string,
+  id: string,
   title: string
 }
 
@@ -12,22 +13,31 @@ interface stateConfig {
 export const useTaskStore = defineStore('Task', {
   state: () : stateConfig => ({
     taskList: [
-      { id: 1, title: '資源回收' },
-      { id: 2, title: '掃廁所' },
-      { id: 3, title: '拖地板' }
-    ]
+      // { boardId: '1', id: '1', title: '資源回收' },
+      // { boardId: '1', id: '2', title: '掃廁所' },
+      // { boardId: '1', id: '3', title: '拖地板' }
+    ],
   }),
-  // getters: {
-  //   getBoardList: (state) => state.boardList,
-  //   getBoardById: (state) => {
-  //     return (boardId) => state.boardList.find((board) => board.id === boardId)
-  //   }
-  // },
+  getters: {
+    getTasksByBoardId: (state) => (board_id) => state.taskList.filter(task => task.boardId === board_id)
+    // getBoardList: (state) => state.boardList,
+    // getBoardById: (state) => {
+    //   return (boardId) => state.boardList.find((board) => board.id === boardId)
+    // }
+  },
   actions: {
-    async getListByBoardId(board_id) {
+    async getTaskListByBoardId(board_id) {
       const payload = { board_id }
-      const taskList = await API.getListByBoardId.get(payload)
-      console.log({ taskList })
+      const task_list = await API.getTaskListByBoardId.get(payload)
+      task_list.forEach(task => {
+        if (!this.checkDuplicated(task, board_id)) {
+          this.taskList.push({
+            boardId: board_id,
+            ...task
+          })
+        }
+      })
+      // console.log({ taskList: this.taskList })
 
       // data.result === 200 && (this.boardList = data.data)
     },
@@ -36,6 +46,12 @@ export const useTaskStore = defineStore('Task', {
       console.log({ task })
 
       // data.result === 200 && (this.boardList = data.data)
+    },
+    async addTask(board_id) {
+
+    },
+    checkDuplicated(addTask, addTask_board_id) {
+      return this.taskList.some(task => task.boardId === addTask_board_id && task.id === addTask.id)
     }
   }
 })

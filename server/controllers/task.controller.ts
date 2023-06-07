@@ -32,7 +32,6 @@ export default class TaskController extends Controller implements IController {
     const tasks = snapshot.docs.map(doc => {
       return { id: doc.id, title: doc.data().title }
     })
-    console.log({ tasks })
-    res.send()
+    res.send(tasks)
   }
 }

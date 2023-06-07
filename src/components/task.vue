@@ -4,7 +4,7 @@
       <Chk />
     </div>
     <div class="task__title">
-      {{ taskData.title }} {{ id }}
+      {{ taskData.title }} {{ taskData.id }}
     </div>
     <div class="task__menu">
       <i-material-symbols-more-horiz class="text-20px" />

@@ -2,11 +2,11 @@ import config from '@/config'
 import httpReq from '@/utils/request'
 
 export default {
-  getListByBoardId: {
+  getTaskListByBoardId: {
     url: `${config.API_URL}`,
     name: 'getListByBoardId',
     get: async function(data) {
-      return await httpReq.get(`${this.url}/${data.board_id}/tasks`)
+      return await httpReq.get(`${this.url}/task/${data.board_id}/list`)
     }
   },
   getTaskById: {
