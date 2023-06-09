@@ -13,7 +13,8 @@ class TaskRoute extends Route {
   protected setRoutes() {
     this.router.get('/:board_id/list', this.taskController.getListByBoardId)
     this.router.get('/list', this.taskController.list)
-    this.router.post('/add', this.taskController.add)
+    this.router.post('/:board_id/add', this.taskController.add)
+    this.router.delete('/:board_id/:task_id/delete', this.taskController.remove)
   }
 }
 

@@ -11,7 +11,6 @@
           <template #item="{ element }">
             <Board
               :board-data="element"
-              @add-task="addTask"
               @delete-board="deleteBoard"
             />
           </template>
@@ -67,12 +66,6 @@ const addBoard = async (props) => {
 const deleteBoard = async (props) => {
   await boardStore.deleteBoard({ id: props.boardId })
   boardStore.getBoardList()
-}
-const addTask = (props) => {
-  const boardId = props.boardId
-  const newTaskTitle = props.newTaskTitle
-  const board = boardStore.getList.filter((item) => item.id === boardId)
-  // board.taskList.push({ title: newTaskTitle, id: board.taskList.length + 1 })
 }
 </script>
 

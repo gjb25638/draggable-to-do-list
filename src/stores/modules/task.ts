@@ -37,18 +37,19 @@ export const useTaskStore = defineStore('Task', {
           })
         }
       })
-      // console.log({ taskList: this.taskList })
-
-      // data.result === 200 && (this.boardList = data.data)
     },
     async getTaskById(board_id, task_id) {
       const task = await API.getTaskById.get({ board_id, task_id })
       console.log({ task })
-
-      // data.result === 200 && (this.boardList = data.data)
     },
-    async addTask(board_id) {
-
+    async addTask(board_id, data) {
+      const payload = { board_id, ...data }
+      await API.add.post(payload)
+    },
+    async deleteTask(board_id, data) {
+      const payload = { board_id, ...data }
+      await API.delete.delete(payload)
+      this.taskList = this.taskList.filter(task => task.id !== data.id)
     },
     checkDuplicated(addTask, addTask_board_id) {
       return this.taskList.some(task => task.boardId === addTask_board_id && task.id === addTask.id)

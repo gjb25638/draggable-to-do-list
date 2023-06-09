@@ -6,18 +6,22 @@
     <div class="task__title">
       {{ taskData.title }} {{ taskData.id }}
     </div>
-    <div class="task__menu">
-      <i-material-symbols-more-horiz class="text-20px" />
+    <div class="task__option">
+      <option-btn
+        :id="taskData.id"
+        @delete-item="() => $emit('deleteTask', { taskId: taskData.id })"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Chk from '@/components/checkbox.vue'
+import optionBtn from './optionBtn.vue'
 const props = defineProps({
-  taskData: { type: Object, default: () => ({ taskTitle: '資源回收' }) },
-  id: { type: Number, default: 0 }
+  taskData: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
 })
+const emit = defineEmits(['deleteTask'])
 const checked = ref(false)
 </script>
 
@@ -30,12 +34,12 @@ const checked = ref(false)
     @apply w-211px;
   }
 
-  .task__menu {
+  .task__option {
     @apply center invisible;
   }
 
   &:hover {
-    .task__menu {
+    .task__option {
       @apply center visible;
     }
   }

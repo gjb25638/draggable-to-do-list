@@ -5,37 +5,31 @@
         {{ `${boardData.id} ${boardData.title}` }}
       </div>
       <div class="board__header__option">
-        <el-dropdown trigger="hover">
-          <i-material-symbols-more-horiz class="text-20px outline-none" />
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item @click="$emit('deleteBoard', { boardId: boardData.id })">
-                刪除
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        <option-btn
+          :id="boardData.id"
+          @delete-item="() => $emit('deleteBoard', { boardId: boardData.id })"
+        />
       </div>
     </div>
     <div class="board__task-list">
       <draggable
         class="list-group"
-        :list="taskList"
+        :list="taskStore.getTasksByBoardId(boardData.id)"
         group="people"
         item-key="id"
       >
-        <template #item="{ element, index }">
-          <Task
-            :id="index"
+        <template #item="{ element }">
+          <task
             :task-data="element"
+            @delete-task="deleteTask"
           />
         </template>
       </draggable>
     </div>
     <div class="board__add-task-btn">
-      <AddItemBtn
+      <add-item-btn
         :item="'task'"
-        @add-item="(props) => $emit('addTask', { boardId: boardData.id, newTaskTitle: props })"
+        @add-item="addTask"
       />
     </div>
   </div>
@@ -44,6 +38,7 @@
 <script setup lang="ts">
 import Task from '@/components/task.vue'
 import AddItemBtn from '@/components/addItemBtn.vue'
+import optionBtn from './optionBtn.vue'
 import draggable from 'vuedraggable'
 const props = defineProps({
   boardData: {
@@ -57,10 +52,7 @@ const props = defineProps({
     })
   }
 })
-const emit = defineEmits(['addTask, deleteBoard'])
-// const addTask = (props) => {
-
-// }
+const emit = defineEmits(['deleteBoard'])
 
 const taskStore = useTaskStore()
 onMounted(() => {
@@ -68,7 +60,16 @@ onMounted(() => {
     taskStore.getTaskListByBoardId(props.boardData.id)
   })
 })
-const taskList = computed(() => taskStore.getTasksByBoardId(props.boardData.id))
+// const taskList = computed(() => taskStore.getTasksByBoardId(props.boardData.id))
+
+const addTask = async (param) => {
+  await taskStore.addTask(props.boardData.id, { title: param.title })
+  taskStore.getTaskListByBoardId(props.boardData.id)
+}
+const deleteTask = async (param) => {
+  await taskStore.deleteTask(props.boardData.id, { id: param.taskId })
+  await taskStore.getTaskListByBoardId(props.boardData.id)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -85,16 +86,5 @@ const taskList = computed(() => taskStore.getTasksByBoardId(props.boardData.id))
   .board__task-list {
     @apply flex flex-col;
   }
-}
-
-.el-dropdown-menu {
-  @apply top-[-10px] bg-white text-black px-10px py-3px rounded-1 list-none cursor-pointer;
-}
-</style>
-<style lang="scss">
-.el-popper__arrow {
-  transform: rotate(45deg);
-
-  @apply top-[-15px] bg-white w-10px h-10px;
 }
 </style>
