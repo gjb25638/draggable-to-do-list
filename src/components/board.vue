@@ -14,7 +14,7 @@
     <div class="board__task-list">
       <draggable
         class="list-group"
-        :list="taskStore.getTasksByBoardId(boardData.id)"
+        :list="taskList"
         group="people"
         item-key="id"
       >
@@ -54,21 +54,26 @@ const props = defineProps({
 })
 const emit = defineEmits(['deleteBoard'])
 
+const taskList: any = ref([])
 const taskStore = useTaskStore()
 onMounted(() => {
   nextTick(() => {
-    taskStore.getTaskListByBoardId(props.boardData.id)
+    refreshTaskList()
   })
 })
 // const taskList = computed(() => taskStore.getTasksByBoardId(props.boardData.id))
 
 const addTask = async (param) => {
   await taskStore.addTask(props.boardData.id, { title: param.title })
-  taskStore.getTaskListByBoardId(props.boardData.id)
+  refreshTaskList()
 }
 const deleteTask = async (param) => {
   await taskStore.deleteTask(props.boardData.id, { id: param.taskId })
-  await taskStore.getTaskListByBoardId(props.boardData.id)
+  refreshTaskList()
+}
+const refreshTaskList = async () => {
+  await taskStore.getListByBoardId(props.boardData.id)
+  taskList.value = await taskStore.getTasksByBoardId(props.boardData.id)
 }
 </script>
 

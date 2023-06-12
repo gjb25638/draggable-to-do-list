@@ -1,5 +1,5 @@
 import { Task, taskConverter } from '../models/task'
-import { DocumentData, DocumentSnapshot } from '@google-cloud/firestore'
+import { DocumentData, DocumentReference, DocumentSnapshot } from '@google-cloud/firestore'
 import { NextFunction, Request, Response } from 'express'
 import db from '../db'
 import FirestoreRepository from '../repositories/firestore.repository'
@@ -15,7 +15,7 @@ export default class TaskController extends Controller implements IController {
   }
 
   public async list(_, res: Response) {
-    const snapshot = await db.collection('task').get()
+    const snapshot = await db.collection('board').doc().collection('task').get()
     const tasks = snapshot.docs.map(doc => {
       return { id: doc.id, title: doc.data().title }
     })
@@ -32,12 +32,18 @@ export default class TaskController extends Controller implements IController {
   public async add(req: Request, res: Response) {
     const { title } = req.body
     const newTaskRef = await db.collection('board').doc(req.params.board_id).collection('task').doc()
-    newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title))
+    await newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title))
     res.send()
   }
   public async remove(req: Request, res: Response) {
     const taskRef = await db.collection('board').doc(req.params.board_id).collection('task').doc(req.params.task_id)
-    taskRef.delete()
+    await taskRef.delete()
+    res.send()
+  }
+  public async removeAll(req: Request, res: Response) {
+    await db.collection('board').doc(req.params.board_id).collection('task').listDocuments().then(tasks => {
+      tasks.map((task) => task.delete())
+    })
     res.send()
   }
 }

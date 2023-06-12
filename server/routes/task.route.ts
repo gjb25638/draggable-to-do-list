@@ -15,6 +15,7 @@ class TaskRoute extends Route {
     this.router.get('/list', this.taskController.list)
     this.router.post('/:board_id/add', this.taskController.add)
     this.router.delete('/:board_id/:task_id/delete', this.taskController.remove)
+    this.router.delete('/:board_id/delete', this.taskController.removeAll)
   }
 }
 

@@ -35,6 +35,8 @@ export const useBoardStore = defineStore('Board', {
       await API.add.post(payload)
     },
     async deleteBoard(data) {
+      const taskStore = useTaskStore()
+      await taskStore.deleteAllByBoardId(data.id)
       const payload = { ...data }
       await API.delete.delete(payload)
     }
