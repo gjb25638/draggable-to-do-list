@@ -12,7 +12,7 @@
         :title="`${submitBtnTitle}`"
         :bg-color="'red'"
         class="mr-10px"
-        @click="$emit('addItem', { title: newItemTitle })"
+        @click="addItem"
       />
       <Btn
         :title="'取消'"
@@ -32,6 +32,13 @@ const props = defineProps({
 })
 const emit = defineEmits(['addItem', 'cancelAddItem'])
 const newItemTitle = ref('')
+const addItem = async () => {
+  const param = {
+    title: newItemTitle,
+    clearInput: () => newItemTitle.value = ''
+  }
+  await emit('addItem', param)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -54,7 +61,7 @@ const newItemTitle = ref('')
     }
 
     :deep(.el-input__suffix) {
-      @apply w-23px absolute right-15px top-13px;
+      @apply w-23px absolute right-5px top-3px;
     }
   }
 

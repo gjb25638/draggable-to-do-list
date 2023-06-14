@@ -38,30 +38,10 @@ onMounted(() => {
   })
 })
 
-// const boardList = reactive([
-//   {
-//     id: 1,
-//     title: '代辦',
-//     taskList: [
-//       { title: '資源回收', id: 1 },
-//       { title: '掃廁所', id: 2 },
-//       { title: '拖地板', id: 3 }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     title: '完成事項',
-//     taskList: [
-//       { title: '資源回收', id: 1 },
-//       { title: '掃廁所', id: 2 },
-//       { title: '拖地板', id: 3 }
-//     ]
-//   }
-// ])
-
 const addBoard = async (props) => {
-  await boardStore.addBoard({ title: props.title })
+  await boardStore.addBoard({ title: props.title.value })
   boardStore.getBoardList()
+  props.clearInput()
 }
 const deleteBoard = async (props) => {
   await boardStore.deleteBoard({ id: props.boardId })

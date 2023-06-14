@@ -44,11 +44,7 @@ const props = defineProps({
   boardData: {
     type: Object, default: () => ({
       id: 1,
-      title: '代辦',
-      // taskList: [
-      //   { title: '資源回收', id: 1 },
-      //   { title: '資源回收', id: 2 }
-      // ]
+      title: '代辦'
     })
   }
 })
@@ -61,11 +57,10 @@ onMounted(() => {
     refreshTaskList()
   })
 })
-// const taskList = computed(() => taskStore.getTasksByBoardId(props.boardData.id))
-
 const addTask = async (param) => {
-  await taskStore.addTask(props.boardData.id, { title: param.title })
+  await taskStore.addTask(props.boardData.id, { title: param.title.value })
   refreshTaskList()
+  param.clearInput()
 }
 const deleteTask = async (param) => {
   await taskStore.deleteTask(props.boardData.id, { id: param.taskId })
