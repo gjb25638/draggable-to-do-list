@@ -16,6 +16,13 @@ export default {
       return await httpReq.post(`${this.url}/board/add`, data)
     }
   },
+  update: {
+    url: `${config.API_URL}`,
+    name: 'add_board',
+    put: async function(data) {
+      return await httpReq.put(`${this.url}/board/${data.id}/update`, { title: data.title })
+    }
+  },
   delete: {
     url: `${config.API_URL}`,
     name: 'delete_board',

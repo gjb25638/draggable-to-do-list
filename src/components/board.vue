@@ -1,9 +1,10 @@
 <template>
   <div class="board">
     <div class="board__header">
-      <div class="board__header__title">
-        {{ `${boardData.id} ${boardData.title}` }}
-      </div>
+      <update-item-plate
+        :data="boardData"
+        @update-item="(param) => $emit('updateBoard', param)"
+      />
       <div class="board__header__option">
         <option-btn
           :id="boardData.id"
@@ -14,7 +15,7 @@
     <div class="board__task-list">
       <draggable
         class="list-group"
-        :list="taskList"
+        :list="taskStore.getTasksByBoardId(boardData.id)"
         group="people"
         item-key="id"
       >
@@ -22,6 +23,7 @@
           <task
             :task-data="element"
             @delete-task="deleteTask"
+            @update-task="updateTask"
           />
         </template>
       </draggable>
@@ -38,6 +40,7 @@
 <script setup lang="ts">
 import Task from '@/components/task.vue'
 import AddItemBtn from '@/components/addItemBtn.vue'
+import updateItemPlate from '@/components/updateItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 import draggable from 'vuedraggable'
 const props = defineProps({
@@ -48,9 +51,9 @@ const props = defineProps({
     })
   }
 })
-const emit = defineEmits(['deleteBoard'])
+const emit = defineEmits(['updateBoard', 'deleteBoard'])
 
-const taskList: any = ref([])
+// const taskList: any = ref([])
 const taskStore = useTaskStore()
 onMounted(() => {
   nextTick(() => {
@@ -62,13 +65,17 @@ const addTask = async (param) => {
   refreshTaskList()
   param.clearInput()
 }
+const updateTask = async (param) => {
+  await taskStore.updateTask(props.boardData.id, param)
+  refreshTaskList()
+}
 const deleteTask = async (param) => {
   await taskStore.deleteTask(props.boardData.id, { id: param.taskId })
   refreshTaskList()
 }
 const refreshTaskList = async () => {
   await taskStore.getListByBoardId(props.boardData.id)
-  taskList.value = await taskStore.getTasksByBoardId(props.boardData.id)
+  // taskList.value = await taskStore.getTasksByBoardId(props.boardData.id)
 }
 </script>
 

@@ -3,9 +3,10 @@
     <div class="task__chk">
       <Chk />
     </div>
-    <div class="task__title">
-      {{ taskData.title }} {{ taskData.id }}
-    </div>
+    <update-item-plate
+      :data="taskData"
+      @update-item="(param) => $emit('updateTask', param)"
+    />
     <div class="task__option">
       <option-btn
         :id="taskData.id"
@@ -17,22 +18,18 @@
 
 <script setup lang="ts">
 import Chk from '@/components/checkbox.vue'
+import updateItemPlate from '@/components/updateItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 const props = defineProps({
   taskData: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
 })
-const emit = defineEmits(['deleteTask'])
+const emit = defineEmits(['deleteTask', 'updateTask'])
 const checked = ref(false)
 </script>
 
 <style lang="scss" scoped>
 .task {
   @apply flex items-center my-10px p-5px border-1 border-solid border-black rounded-2;
-
-
-  .task__title {
-    @apply w-211px;
-  }
 
   .task__option {
     @apply center invisible;

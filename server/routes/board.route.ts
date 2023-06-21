@@ -13,6 +13,7 @@ class BoardRoute extends Route {
   protected setRoutes() {
     this.router.get('/list', this.boardController.readAll)
     this.router.post('/add', this.boardController.create)
+    this.router.put('/:id/update', this.boardController.update)
     this.router.delete('/:id/delete', this.boardController.delete)
   }
 }

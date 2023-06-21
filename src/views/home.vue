@@ -12,6 +12,7 @@
             <Board
               :board-data="element"
               @delete-board="deleteBoard"
+              @update-board="updateBoard"
             />
           </template>
         </draggable>
@@ -42,6 +43,10 @@ const addBoard = async (props) => {
   await boardStore.addBoard({ title: props.title.value })
   boardStore.getBoardList()
   props.clearInput()
+}
+const updateBoard = async (param) => {
+  await boardStore.updateBoard(param)
+  boardStore.getBoardList()
 }
 const deleteBoard = async (props) => {
   await boardStore.deleteBoard({ id: props.boardId })

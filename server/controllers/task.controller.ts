@@ -35,6 +35,11 @@ export default class TaskController extends Controller implements IController {
     await newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title))
     res.send()
   }
+  public async change(req: Request, res: Response) {
+    const taskRef = await db.collection('board').doc(req.params.board_id).collection('task').doc(req.params.task_id)
+    await taskRef.update(req.body)
+    res.send()
+  }
   public async remove(req: Request, res: Response) {
     const taskRef = await db.collection('board').doc(req.params.board_id).collection('task').doc(req.params.task_id)
     await taskRef.delete()

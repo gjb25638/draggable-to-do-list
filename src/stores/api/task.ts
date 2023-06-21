@@ -30,6 +30,13 @@ export default {
       return await httpReq.post(`${this.url}/task/${data.board_id}/add`, data)
     }
   },
+  update: {
+    url: `${config.API_URL}`,
+    name: 'update_task',
+    put: async function(data) {
+      return await httpReq.put(`${this.url}/task/${data.board_id}/${data.id}/update`, { title: data.title })
+    }
+  },
   delete: {
     url: `${config.API_URL}`,
     name: 'delete_task',

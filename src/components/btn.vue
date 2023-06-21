@@ -2,6 +2,7 @@
   <div
     class="btn"
     :style="{ 'background-color': bgColor }"
+    :class="btnSize"
   >
     <div
       class="btn__title"
@@ -16,7 +17,8 @@
 const props = defineProps({
   title: { type: String, default: 'btn' },
   bgColor: { type: String, default: '#22c55e' },
-  fontColor: { type: String, default: 'white' }
+  fontColor: { type: String, default: 'white' },
+  size: { type: String, default: 'large' }
 })
 const emit = defineEmits(['btnClick'])
 
@@ -40,6 +42,13 @@ const removeClickEvent = () => {
   const btn = document.querySelector('.btn')
   btn?.removeEventListener('click', emitClickEvent)
 }
+
+const btnSize = computed(() => {
+  return {
+    large: props.size === 'large',
+    small: props.size === 'small',
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -47,7 +56,7 @@ const removeClickEvent = () => {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   transition: all .3s;
 
-  @apply center px-20px py-5px my-10px bg-green-500 b-1 b-solid b-green-500 rounded-2 whitespace-nowrap cursor-pointer;
+  @apply center bg-green-500 b-1 b-solid b-green-500 rounded-2 whitespace-nowrap cursor-pointer;
 
   &:hover {
     box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1);
@@ -61,6 +70,18 @@ const removeClickEvent = () => {
 
   .btn__title {
     @apply text-18px font-600 c-white;
+  }
+
+  &.small {
+    @apply px-10px py-2px;
+  }
+
+  // .medium {
+
+  // }
+
+  &.large {
+    @apply px-20px py-5px my-10px;
   }
 }
 </style>
