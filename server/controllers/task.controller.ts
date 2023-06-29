@@ -17,22 +17,21 @@ export default class TaskController extends Controller implements IController {
   public async list(_, res: Response) {
     const snapshot = await db.collection('board').doc().collection('task').get()
     const tasks = snapshot.docs.map(doc => {
-      return { id: doc.id, title: doc.data().title }
+      return { id: doc.id, title: doc.data().title, index: doc.data().index }
     })
-    console.log({ tasks })
     res.send(tasks)
   }
   public async getListByBoardId(req: Request, res: Response) {
     const snapshot = await db.collection('board').doc(req.params.board_id).collection('task').get()
     const tasks = snapshot.docs.map(doc => {
-      return { id: doc.id, title: doc.data().title }
+      return { id: doc.id, title: doc.data().title, index: doc.data().index }
     })
     res.send(tasks)
   }
   public async add(req: Request, res: Response) {
-    const { title } = req.body
+    const { title, index } = req.body
     const newTaskRef = await db.collection('board').doc(req.params.board_id).collection('task').doc()
-    await newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title))
+    await newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title, index))
     res.send()
   }
   public async change(req: Request, res: Response) {

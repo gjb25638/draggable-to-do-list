@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import Btn from '@/components/btn.vue'
 const props = defineProps({
-  data: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
+  data: { type: Object, default: () => ({ id: '1', title: '資源回收', index: -1 }) },
 })
 const emit = defineEmits(['editItem'])
 const showEditPanel = ref(false)
@@ -56,7 +56,7 @@ const closeEditPanel = () => {
   inputText.value = props.data.title
 }
 const editItem = async () => {
-  await emit('editItem', { id: props.data.id, title: inputText.value })
+  await emit('editItem', { id: props.data.id, title: inputText.value, index: props.data.index })
   showEditPanel.value = false
 }
 </script>

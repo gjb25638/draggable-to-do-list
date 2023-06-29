@@ -34,6 +34,7 @@
 import AddItemBtn from '@/components/addItemBtn.vue'
 import Board from '@/components/board.vue'
 import draggable from 'vuedraggable'
+import dragHandlerMixin from '@/mixin/dragHandlerMixin'
 
 const boardStore = useBoardStore()
 onMounted(() => {
@@ -43,7 +44,7 @@ onMounted(() => {
 })
 
 const addBoard = async (props) => {
-  await boardStore.addBoard({ title: props.title.value })
+  await boardStore.addBoard({ title: props.title.value, index: boardStore.getLength })
   boardStore.getBoardList()
   props.clearInput()
 }
@@ -56,9 +57,8 @@ const deleteBoard = async (props) => {
   boardStore.getBoardList()
 }
 
-const dragBoard = (e) => {
-  console.log({ e })
-}
+const { dragCalcIndex } = dragHandlerMixin()
+const dragBoard = (evt) => dragCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, boardStore.getList, updateBoard)
 </script>
 
 <style lang="scss" scoped>
@@ -78,3 +78,4 @@ const dragBoard = (e) => {
   }
 }
 </style>
+@/mixin/dragHandlerMixin

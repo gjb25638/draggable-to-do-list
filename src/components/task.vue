@@ -6,7 +6,7 @@
     {{ taskData.index }}
     <edit-item-plate
       :data="taskData"
-      @update-item="(param) => $emit('updateTask', param)"
+      @edit-item="(param) => $emit('updateTask', param)"
     />
     <div class="task__option">
       <option-btn
@@ -22,7 +22,7 @@ import Chk from '@/components/checkbox.vue'
 import editItemPlate from '@/components/editItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 const props = defineProps({
-  taskData: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
+  taskData: { type: Object, default: () => ({ id: '1', title: '資源回收', index: -1 }) },
   taskIndex: { type: Number, default: -1 }
 })
 const emit = defineEmits(['deleteTask', 'updateTask'])

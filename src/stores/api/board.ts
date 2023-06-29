@@ -20,7 +20,7 @@ export default {
     url: `${config.API_URL}`,
     name: 'add_board',
     put: async function(data) {
-      return await httpReq.put(`${this.url}/board/${data.id}/update`, { title: data.title })
+      return await httpReq.put(`${this.url}/board/${data.id}/update`, data)
     }
   },
   delete: {

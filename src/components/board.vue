@@ -4,7 +4,7 @@
       {{ boardData.index }}
       <edit-item-plate
         :data="boardData"
-        @update-item="(param) => $emit('updateBoard', param)"
+        @edit-item="(param) => $emit('updateBoard', param)"
       />
       <div class="board__header__option">
         <option-btn
@@ -50,7 +50,8 @@ const props = defineProps({
   boardData: {
     type: Object, default: () => ({
       id: 1,
-      title: '代辦'
+      title: '代辦',
+      index: -1
     })
   },
   boardIndex: { type: Number, default: -1 }
@@ -65,7 +66,7 @@ onMounted(() => {
   })
 })
 const addTask = async (param) => {
-  await taskStore.addTask(props.boardData.id, { title: param.title.value })
+  await taskStore.addTask(props.boardData.id, { title: param.title.value, index: taskStore.getLength(props.boardData.id) })
   refreshTaskList()
   param.clearInput()
 }

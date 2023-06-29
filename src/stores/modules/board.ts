@@ -3,6 +3,7 @@ import API from '@/stores/api/board'
 interface Board {
   id: string,
   title: string,
+  index: number
 }
 
 interface stateConfig {
@@ -17,7 +18,7 @@ export const useBoardStore = defineStore('Board', {
     ]
   }),
   getters: {
-    getList: (state): Array<Board> => state.boardList,
+    getList: (state): Array<Board> => state.boardList.sort((a, b) => a.index - b.index),
     getBoardById: (state): Board | any => {
       return (boardId) => state.boardList.find((board) => board.id === boardId)
     },

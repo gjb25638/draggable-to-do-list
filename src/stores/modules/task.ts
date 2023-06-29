@@ -3,7 +3,8 @@ import API from '@/stores/api/task'
 interface Task {
   boardId: string,
   id: string,
-  title: string
+  title: string,
+  index: number
 }
 
 interface stateConfig {
@@ -57,10 +58,10 @@ export const useTaskStore = defineStore('Task', {
           this.replaceDuplicated(task, board_id)
         }
       })
-      console.log({ task_list })
-      console.log({ get_list_from_api: this.taskList })
+      // console.log({ task_list })
+      // console.log({ get_list_from_api: this.taskList })
       // 對 boradId 和 index 做雙層排序，boradId先，index後
-      // this.doubleLayerSort(this.taskList)
+      this.doubleLayerSort(this.taskList)
     },
     async getTaskById(board_id, task_id) {
       const task = await API.getTaskById.get({ board_id, task_id })
