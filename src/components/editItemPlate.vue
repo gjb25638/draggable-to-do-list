@@ -1,31 +1,33 @@
 <template>
-  <div class="updateItemPlate">
+  <div class="editItemPlate">
     <div
-      v-if="!showUpdatePanel"
+      v-if="!showEditPanel"
       class="title"
-      @click="openUpdatePanel"
+      @click="openEditPanel"
     >
       {{ data.title }}
     </div>
     <div
-      v-if="showUpdatePanel"
-      class="update-panel"
+      v-if="showEditPanel"
+      class="edit-panel"
     >
       <input
+        ref="inputRef"
         v-model="inputText"
-        class="update-panel__input"
+        class="edit-panel__input"
         type="text"
+        onfocus="this.select()"
       >
-      <div class="update-panel__btn-group">
+      <div class="edit-panel__btn-group">
         <btn
           :title="'確認'"
           :size="'small'"
-          @click="updateItem"
+          @click="editItem"
         />
         <btn
           :title="'取消'"
           :size="'small'"
-          @click="closeUpdatePanel"
+          @click="closeEditPanel"
         />
       </div>
     </div>
@@ -37,40 +39,44 @@ import Btn from '@/components/btn.vue'
 const props = defineProps({
   data: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
 })
-const emit = defineEmits(['updateItem'])
-const showUpdatePanel = ref(false)
+const emit = defineEmits(['editItem'])
+const showEditPanel = ref(false)
 const inputText = ref('')
+const inputRef = ref()
 onMounted(() => {
   inputText.value = props.data.title
 })
 
-const openUpdatePanel = () => showUpdatePanel.value = true
-const closeUpdatePanel = () => {
-  showUpdatePanel.value = false
+const openEditPanel = () => {
+  showEditPanel.value = true
+  nextTick(() => inputRef.value.focus())
+}
+const closeEditPanel = () => {
+  showEditPanel.value = false
   inputText.value = props.data.title
 }
-const updateItem = async () => {
-  await emit('updateItem', { id: props.data.id, title: inputText.value })
-  showUpdatePanel.value = false
+const editItem = async () => {
+  await emit('editItem', { id: props.data.id, title: inputText.value })
+  showEditPanel.value = false
 }
 </script>
 
 <style lang="scss" scoped>
-.updateItemPlate {
+.editItemPlate {
   @apply w-211px flex overflow-hidden;
 
   .title {
     @apply text-18px leading-18px;
   }
 
-  .update-panel {
+  .edit-panel {
     @apply flex flex-col;
 
-    .update-panel__input {
+    .edit-panel__input {
       @apply bg-[#C6E7C9] text-18px leading-18px w-200px rounded-5px;
     }
 
-    .update-panel__btn-group {
+    .edit-panel__btn-group {
       @apply flex;
 
       .btn {

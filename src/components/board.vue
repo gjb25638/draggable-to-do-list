@@ -2,7 +2,7 @@
   <div class="board">
     <div class="board__header">
       {{ boardData.index }}
-      <update-item-plate
+      <edit-item-plate
         :data="boardData"
         @update-item="(param) => $emit('updateBoard', param)"
       />
@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import Task from '@/components/task.vue'
 import AddItemBtn from '@/components/addItemBtn.vue'
-import updateItemPlate from '@/components/updateItemPlate.vue'
+import editItemPlate from '@/components/editItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 import draggable from 'vuedraggable'
 const props = defineProps({

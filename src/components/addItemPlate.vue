@@ -45,14 +45,11 @@ const addItem = async () => {
     clearInput: () => newItemTitle.value = ''
   }
   await emit('addItem', param)
-  inputRef.value.focus()
+  focusInput()
 }
 
-watchEffect(() => {
-  if (props.isShow && inputRef.value) {
-    inputRef.value.focus()
-  }
-})
+watchEffect(() => (props.isShow && inputRef.value) && focusInput())
+const focusInput = () => nextTick(() => inputRef.value.focus())
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,7 @@
       <Chk />
     </div>
     {{ taskData.index }}
-    <update-item-plate
+    <edit-item-plate
       :data="taskData"
       @update-item="(param) => $emit('updateTask', param)"
     />
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import Chk from '@/components/checkbox.vue'
-import updateItemPlate from '@/components/updateItemPlate.vue'
+import editItemPlate from '@/components/editItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 const props = defineProps({
   taskData: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
