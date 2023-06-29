@@ -18,8 +18,8 @@
         class="list-group"
         :list="taskStore.getTasksByBoardId(boardData.id)"
         group="task"
-        item-key="id"
-        @change="dragTask"
+        item-key="index"
+        @change="dragTask(boardData.id, $event)"
       >
         <template #item="{ element, index }">
           <task
@@ -46,6 +46,8 @@ import AddItemBtn from '@/components/addItemBtn.vue'
 import editItemPlate from '@/components/editItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 import draggable from 'vuedraggable'
+import dragHandlerMixin from '@/mixin/dragHandlerMixin'
+
 const props = defineProps({
   boardData: {
     type: Object, default: () => ({
@@ -82,8 +84,23 @@ const refreshTaskList = async () => {
   await taskStore.getListByBoardId(props.boardData.id)
   // taskList.value = await taskStore.getTasksByBoardId(props.boardData.id)
 }
-const dragTask = (e) => {
-  console.log({ e })
+
+const { movedCalcIndex } = dragHandlerMixin()
+const dragTask = (boardId, evt) => {
+  console.log({ boardId })
+  console.log({ evt })
+  if (evt.moved) {
+    movedCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, taskStore.getTasksByBoardId(props.boardData.id), updateTask)
+  }
+  // if (evt.added) {
+
+  // }
+  // if (evt.removed) {
+
+  // }
+}
+const addedCalcIndex = (newIndex, element, list, addFunc, deleteFunc) => {
+
 }
 </script>
 

@@ -1,21 +1,21 @@
 export default function() {
-  const dragCalcIndex = <T extends { index: number }>(newIndex: number, oldIndex: number, list: T[], updateFunc: Function) => {
+  const movedCalcIndex = <T extends { index: number }>(newIndex: number, oldIndex: number, list: T[], updateFunc: Function) => {
     if (!list || list.length < 2) return
 
     const offset = Math.abs(newIndex - oldIndex)
-    const dragItem = list.find(item => item.index === oldIndex)
+    const draggedItem = list.find(item => item.index === oldIndex)
     const targetItem = list.find(item => item.index === newIndex)
 
-    if (!dragItem || !targetItem) return
+    if (!draggedItem || !targetItem) return
 
     if (offset === 1) {
-      dragItem.index = -1
+      draggedItem.index = -1
       targetItem.index = oldIndex
-      dragItem.index = newIndex
-      updateFunc(dragItem)
+      draggedItem.index = newIndex
+      updateFunc(draggedItem)
       updateFunc(targetItem)
     } else if (offset > 1) {
-      dragItem.index = -1
+      draggedItem.index = -1
       if (newIndex > oldIndex) {
         for (let i = 1; i <= offset; i++) {
           const item = list.find(item => item.index === oldIndex + i)
@@ -31,12 +31,12 @@ export default function() {
           updateFunc(item)
         }
       }
-      dragItem.index = newIndex
-      updateFunc(dragItem)
+      draggedItem.index = newIndex
+      updateFunc(draggedItem)
     }
     return
   }
   return {
-    dragCalcIndex
+    movedCalcIndex
   }
 }

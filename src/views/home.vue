@@ -7,7 +7,7 @@
           class="list-group"
           :list="boardStore.getList"
           group="board"
-          item-key="id"
+          item-key="index"
           @change="dragBoard"
         >
           <template #item="{ element, index }">
@@ -57,8 +57,8 @@ const deleteBoard = async (props) => {
   boardStore.getBoardList()
 }
 
-const { dragCalcIndex } = dragHandlerMixin()
-const dragBoard = (evt) => dragCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, boardStore.getList, updateBoard)
+const { movedCalcIndex } = dragHandlerMixin()
+const dragBoard = (evt) => movedCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, boardStore.getList, updateBoard)
 </script>
 
 <style lang="scss" scoped>
