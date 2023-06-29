@@ -19,10 +19,13 @@ export const useTaskStore = defineStore('Task', {
     ],
   }),
   getters: {
-    getTasksByBoardId: (state) => (board_id) => {
-      console.log('trigger_get_list')
+    getTasksByBoardId: (state) => (board_id) : Array<Task> => {
       return state.taskList.filter(task => task.boardId === board_id)
-    }
+    },
+    getLength: (getters: any) => (board_id) : number => getters.getTasksByBoardId(board_id).length || 0
+    // getLength(board_id) : number | any {
+    //   return this.getTasksByBoardId(board_id).length || 0
+    // }
     // getBoardList: (state) => state.boardList,
     // getBoardById: (state) => {
     //   return (boardId) => state.boardList.find((board) => board.id === boardId)
@@ -56,6 +59,8 @@ export const useTaskStore = defineStore('Task', {
       })
       console.log({ task_list })
       console.log({ get_list_from_api: this.taskList })
+      // 對 boradId 和 index 做雙層排序，boradId先，index後
+      // this.doubleLayerSort(this.taskList)
     },
     async getTaskById(board_id, task_id) {
       const task = await API.getTaskById.get({ board_id, task_id })
@@ -83,13 +88,18 @@ export const useTaskStore = defineStore('Task', {
     },
     replaceDuplicated(updateTask, updateTask_board_id) {
       const targetIndex = this.taskList.findIndex(task => task.boardId === updateTask_board_id && task.id === updateTask.id)
-      console.log({ targetIndex })
-      console.log({ updateTask })
       this.taskList.splice(targetIndex, 1, {
         boardId: updateTask_board_id,
         ...updateTask
       })
-      console.log({ target: this.taskList })
-    }
+    },
+    doubleLayerSort: (arr) => arr.sort((a, b) => {
+      const value1 = a.boardId
+      const value2 = b.boardId
+      if (value1 === value2) {
+        return a.index - b.index
+      }
+      return value1 - value2
+    })
   }
 })

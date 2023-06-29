@@ -3,6 +3,7 @@
     <div class="task__chk">
       <Chk />
     </div>
+    {{ taskData.index }}
     <update-item-plate
       :data="taskData"
       @update-item="(param) => $emit('updateTask', param)"
@@ -22,6 +23,7 @@ import updateItemPlate from '@/components/updateItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 const props = defineProps({
   taskData: { type: Object, default: () => ({ id: '1', title: '資源回收' }) },
+  taskIndex: { type: Number, default: -1 }
 })
 const emit = defineEmits(['deleteTask', 'updateTask'])
 const checked = ref(false)

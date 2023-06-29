@@ -72,7 +72,8 @@ export default class Controller implements IController {
       if (list.length === 0) {
         const err: CustomError = new Error('The list of entities was empty') as CustomError
         err.status = 204
-        next(err)
+        // next(err)
+        res.status(200).send([])
         return
       }
       allPromises = new Array<Promise<DocumentSnapshot>>()

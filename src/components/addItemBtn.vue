@@ -9,13 +9,11 @@
         @click="showAddItem()"
       />
     </div>
-    <div
-      v-show="isShowAddItem"
-      class="addItemBtn__input-form"
-    >
+    <div class="addItemBtn__input-form">
       <AddItemPlate
         :input-place-holder="inputPlaceHolder"
         :submit-btn-title="btnTitle"
+        :is-show="isShowAddItem"
         @add-item="(props) => $emit('addItem', props)"
         @cancel-add-item="hideAddItem()"
       />

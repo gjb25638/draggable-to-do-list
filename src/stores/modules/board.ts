@@ -21,9 +21,7 @@ export const useBoardStore = defineStore('Board', {
     getBoardById: (state): Board | any => {
       return (boardId) => state.boardList.find((board) => board.id === boardId)
     },
-    getLength: (state): number | any => {
-      state.boardList.length
-    }
+    getLength: (state): number | any => state.boardList.length || 0
   },
   actions: {
     async getBoardList() {

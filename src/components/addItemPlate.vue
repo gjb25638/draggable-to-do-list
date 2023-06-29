@@ -1,7 +1,11 @@
 <template>
-  <div class="addItemPlate">
+  <div
+    v-if="isShow"
+    class="addItemPlate"
+  >
     <div class="addItemPlate__input">
       <el-input
+        ref="inputRef"
         v-model="newItemTitle"
         :clearable="true"
         :placeholder="`${inputPlaceHolder}`"
@@ -28,17 +32,27 @@
 import Btn from '@/components/btn.vue'
 const props = defineProps({
   submitBtnTitle: { type: String, default: '添加項目' },
-  inputPlaceHolder: { type: String, default: '命名這個項目' }
+  inputPlaceHolder: { type: String, default: '命名這個項目' },
+  isShow: { type: Boolean, default: false }
 })
 const emit = defineEmits(['addItem', 'cancelAddItem'])
+const { proxy }: any = getCurrentInstance()
 const newItemTitle = ref('')
+const inputRef = ref()
 const addItem = async () => {
   const param = {
     title: newItemTitle,
     clearInput: () => newItemTitle.value = ''
   }
   await emit('addItem', param)
+  inputRef.value.focus()
 }
+
+watchEffect(() => {
+  if (props.isShow && inputRef.value) {
+    inputRef.value.focus()
+  }
+})
 </script>
 
 <style lang="scss" scoped>

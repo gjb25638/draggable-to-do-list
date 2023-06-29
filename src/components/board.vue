@@ -1,6 +1,7 @@
 <template>
   <div class="board">
     <div class="board__header">
+      {{ boardData.index }}
       <update-item-plate
         :data="boardData"
         @update-item="(param) => $emit('updateBoard', param)"
@@ -16,12 +17,14 @@
       <draggable
         class="list-group"
         :list="taskStore.getTasksByBoardId(boardData.id)"
-        group="people"
+        group="task"
         item-key="id"
+        @change="dragTask"
       >
-        <template #item="{ element }">
+        <template #item="{ element, index }">
           <task
             :task-data="element"
+            :task-index="index"
             @delete-task="deleteTask"
             @update-task="updateTask"
           />
@@ -49,7 +52,8 @@ const props = defineProps({
       id: 1,
       title: '代辦'
     })
-  }
+  },
+  boardIndex: { type: Number, default: -1 }
 })
 const emit = defineEmits(['updateBoard', 'deleteBoard'])
 
@@ -76,6 +80,9 @@ const deleteTask = async (param) => {
 const refreshTaskList = async () => {
   await taskStore.getListByBoardId(props.boardData.id)
   // taskList.value = await taskStore.getTasksByBoardId(props.boardData.id)
+}
+const dragTask = (e) => {
+  console.log({ e })
 }
 </script>
 

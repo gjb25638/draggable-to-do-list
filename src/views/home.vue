@@ -6,11 +6,14 @@
         <draggable
           class="list-group"
           :list="boardStore.getList"
+          group="board"
           item-key="id"
+          @change="dragBoard"
         >
-          <template #item="{ element }">
+          <template #item="{ element, index }">
             <Board
               :board-data="element"
+              :board-index="index"
               @delete-board="deleteBoard"
               @update-board="updateBoard"
             />
@@ -51,6 +54,10 @@ const updateBoard = async (param) => {
 const deleteBoard = async (props) => {
   await boardStore.deleteBoard({ id: props.boardId })
   boardStore.getBoardList()
+}
+
+const dragBoard = (e) => {
+  console.log({ e })
 }
 </script>
 
