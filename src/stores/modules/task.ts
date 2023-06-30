@@ -60,7 +60,7 @@ export const useTaskStore = defineStore('Task', {
       })
       // console.log({ task_list })
       // console.log({ get_list_from_api: this.taskList })
-      // 對 boradId 和 index 做雙層排序，boradId先，index後
+      // 對 boradId 和 index 做雙層排序，borad.index先，task.index後
       this.doubleLayerSort(this.taskList)
     },
     async getTaskById(board_id, task_id) {
@@ -95,12 +95,17 @@ export const useTaskStore = defineStore('Task', {
       })
     },
     doubleLayerSort: (arr) => arr.sort((a, b) => {
+      const boardStore = useBoardStore()
+      const list = boardStore.getList
+      const board1: any = list.find(board => board.id === a.boardId)
+      const board2: any = list.find(board => board.id === b.boardId)
+
       const value1 = a.boardId
       const value2 = b.boardId
       if (value1 === value2) {
         return a.index - b.index
       }
-      return value1 - value2
+      return board1.index - board2.index
     })
   }
 })

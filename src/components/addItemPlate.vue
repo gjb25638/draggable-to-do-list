@@ -41,7 +41,7 @@ const newItemTitle = ref('')
 const inputRef = ref()
 const addItem = async () => {
   const param = {
-    title: newItemTitle,
+    title: newItemTitle.value,
     clearInput: () => newItemTitle.value = ''
   }
   await emit('addItem', param)

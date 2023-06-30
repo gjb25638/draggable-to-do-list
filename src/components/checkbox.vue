@@ -1,14 +1,24 @@
 <template>
-  <div class="chk">
+  <div
+    class="chk"
+    :class="{ checked }"
+    @click="change"
+  >
     <div class="chk__border" />
     <div class="chk__circle" />
-    <Checked class="chk__checked" />
+    <CheckedIcon class="chk__checked" />
   </div>
 </template>
 
 <script setup lang="ts">
-import Checked from '@/components/img/checked.vue'
+import CheckedIcon from '@/components/img/checked.vue'
 
+const emit = defineEmits(['checkedChange'])
+const checked = ref(false)
+const change = () => {
+  checked.value = !checked.value
+  emit('checkedChange', checked.value)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +46,8 @@ import Checked from '@/components/img/checked.vue'
     @apply center inline-block opacity-0 pointer-events-none;
   }
 
-  &:hover {
+  &:hover,
+  &.checked {
     .chk__checked {
       @apply opacity-100;
     }

@@ -36,7 +36,39 @@ export default function() {
     }
     return
   }
+  // addedCalcIndex just service task
+  const addedCalcIndex = <T extends { id: string, title: string, index: number }>(newIndex: number, el: T, boardId: string, list: T[], addFunc: Function, updateFunc: Function) => {
+    if (!list || list.length < 0) return
+
+    if (list.length > 0 && list.length > newIndex) {
+      for(let i = 1; i <= list.length - newIndex; i++) {
+        const item = list.find(item => item.index === list.length - i)
+        if (!item) continue
+        item.index += 1
+        updateFunc(item)
+      }
+    }
+    addFunc({ title: el.title, index: newIndex })(boardId)
+    return
+  }
+  // addedCalcIndex just service task
+  const removedCalcIndex = async <T extends { id: string, index: number }>(oldIndex: number, el: T, boardId: string, list: T[], deleteFunc: Function, updateFunc: Function) => {
+    if (!list || list.length < 1) return
+
+    await deleteFunc({ taskId: el.id })(boardId)
+    if (list.length !== 1 && oldIndex !== list.length - 1) {
+      for (let i = 1; i <= list.length - oldIndex - 1; i++) {
+        const item = list.find(item => item.index === oldIndex + i)
+        if (!item) continue
+        item.index -= 1
+        updateFunc(item)
+      }
+    }
+    return
+  }
   return {
-    movedCalcIndex
+    movedCalcIndex,
+    addedCalcIndex,
+    removedCalcIndex
   }
 }

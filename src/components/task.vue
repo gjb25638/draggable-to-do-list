@@ -1,7 +1,10 @@
 <template>
-  <div class="task">
+  <div
+    class="task"
+    :class="{ checked }"
+  >
     <div class="task__chk">
-      <Chk />
+      <Chk @checked-change="checkedChange" />
     </div>
     {{ taskData.index }}
     <edit-item-plate
@@ -27,11 +30,14 @@ const props = defineProps({
 })
 const emit = defineEmits(['deleteTask', 'updateTask'])
 const checked = ref(false)
+const checkedChange = (param) => {
+  checked.value = param
+}
 </script>
 
 <style lang="scss" scoped>
 .task {
-  @apply flex items-center my-10px p-5px border-1 border-solid border-black rounded-2;
+  @apply flex items-center my-10px p-5px bg-[#FFB366] border-1 border-solid border-black rounded-2;
 
   .task__option {
     @apply center invisible;
@@ -41,6 +47,10 @@ const checked = ref(false)
     .task__option {
       @apply center visible;
     }
+  }
+
+  &.checked {
+    @apply bg-[#C0C0C0] line-through;
   }
 }
 </style>

@@ -18,14 +18,14 @@
         class="list-group"
         :list="taskStore.getTasksByBoardId(boardData.id)"
         group="task"
-        item-key="index"
+        item-key="id"
         @change="dragTask(boardData.id, $event)"
       >
         <template #item="{ element, index }">
           <task
             :task-data="element"
             :task-index="index"
-            @delete-task="deleteTask"
+            @delete-task="(param) => deleteTask(param)(boardData.id)"
             @update-task="updateTask"
           />
         </template>
@@ -34,7 +34,7 @@
     <div class="board__add-task-btn">
       <add-item-btn
         :item="'task'"
-        @add-item="addTask"
+        @add-item="(param) => addTask({ ...param, index: taskStore.getLength(boardData.id) })(boardData.id)"
       />
     </div>
   </div>
@@ -60,48 +60,44 @@ const props = defineProps({
 })
 const emit = defineEmits(['updateBoard', 'deleteBoard'])
 
-// const taskList: any = ref([])
 const taskStore = useTaskStore()
 onMounted(() => {
   nextTick(() => {
-    refreshTaskList()
+    refreshTaskList(props.boardData.id)
   })
 })
-const addTask = async (param) => {
-  await taskStore.addTask(props.boardData.id, { title: param.title.value, index: taskStore.getLength(props.boardData.id) })
-  refreshTaskList()
-  param.clearInput()
+const addTask = (param) => async (boardId) => {
+  await taskStore.addTask(boardId, { title: param.title, index: param.index })
+  refreshTaskList(boardId)
+  if (param.clearInput) param.clearInput()
 }
 const updateTask = async (param) => {
   await taskStore.updateTask(props.boardData.id, param)
-  refreshTaskList()
+  refreshTaskList(props.boardData.id)
 }
-const deleteTask = async (param) => {
-  await taskStore.deleteTask(props.boardData.id, { id: param.taskId })
-  refreshTaskList()
+const deleteTask = (param) => async (boardId) => {
+  await taskStore.deleteTask(boardId, { id: param.taskId })
+  refreshTaskList(boardId)
 }
-const refreshTaskList = async () => {
-  await taskStore.getListByBoardId(props.boardData.id)
-  // taskList.value = await taskStore.getTasksByBoardId(props.boardData.id)
+const refreshTaskList = async (boardId) => {
+  await taskStore.getListByBoardId(boardId)
 }
 
-const { movedCalcIndex } = dragHandlerMixin()
+const { movedCalcIndex, addedCalcIndex, removedCalcIndex } = dragHandlerMixin()
 const dragTask = (boardId, evt) => {
-  console.log({ boardId })
-  console.log({ evt })
+  // console.log({ boardId })
+  // console.log({ evt })
   if (evt.moved) {
-    movedCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, taskStore.getTasksByBoardId(props.boardData.id), updateTask)
+    movedCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, taskStore.getTasksByBoardId(boardId), updateTask)
   }
-  // if (evt.added) {
-
-  // }
-  // if (evt.removed) {
-
-  // }
+  if (evt.added) {
+    addedCalcIndex(evt.added.newIndex, evt.added.element, boardId, taskStore.getTasksByBoardId(boardId), addTask, updateTask)
+  }
+  if (evt.removed) {
+    removedCalcIndex(evt.removed.oldIndex, evt.removed.element, boardId, taskStore.getTasksByBoardId(boardId), deleteTask, updateTask)
+  }
 }
-const addedCalcIndex = (newIndex, element, list, addFunc, deleteFunc) => {
 
-}
 </script>
 
 <style lang="scss" scoped>

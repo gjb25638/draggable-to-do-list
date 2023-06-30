@@ -34,21 +34,21 @@ export default {
     url: `${config.API_URL}`,
     name: 'update_task',
     put: async function(data) {
-      return await httpReq.put(`${this.url}/task/${data.board_id}/${data.id}/update`, data)
+      return await httpReq.put(`${this.url}/task/${data.board_id}/${data.id}/update`, { title: data.title, index: data.index })
     }
   },
   delete: {
     url: `${config.API_URL}`,
     name: 'delete_task',
     delete: async function(data) {
-      return await httpReq.delete(`${this.url}/task/${data.board_id}/${data.id}/delete`, )
+      return await httpReq.delete(`${this.url}/task/${data.board_id}/${data.id}/delete`)
     }
   },
   deleteAll: {
     url: `${config.API_URL}`,
     name: 'delete_all_task',
     delete: async function(data) {
-      return await httpReq.delete(`${this.url}/task/${data.board_id}/delete`, )
+      return await httpReq.delete(`${this.url}/task/${data.board_id}/delete`)
     }
   }
 }
