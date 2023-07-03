@@ -14,24 +14,26 @@
       </div>
     </div>
     <div class="board__task-list">
-      <draggable
-        class="list-group"
-        :list="taskStore.getTasksByBoardId(boardData.id)"
-        group="task"
-        item-key="id"
-        @change="dragTask(boardData.id, $event)"
-      >
-        <template #item="{ element, index }">
-          <task
-            :is-show="element.finished ? isShowfinished : true"
-            :task-data="element"
-            :task-index="index"
-            @delete-task="(param) => deleteTask(param)(boardData.id)"
-            @update-task="updateTask"
-            @checked-change="updateTask"
-          />
-        </template>
-      </draggable>
+      <el-scrollbar>
+        <draggable
+          class="list-group"
+          :list="taskStore.getTasksByBoardId(boardData.id)"
+          group="task"
+          item-key="id"
+          @change="dragTask(boardData.id, $event)"
+        >
+          <template #item="{ element, index }">
+            <task
+              :is-show="element.finished ? isShowfinished : true"
+              :task-data="element"
+              :task-index="index"
+              @delete-task="(param) => deleteTask(param)(boardData.id)"
+              @update-task="updateTask"
+              @checked-change="updateTask"
+            />
+          </template>
+        </draggable>
+      </el-scrollbar>
     </div>
     <div class="board__add-task-btn">
       <add-item-btn
@@ -114,7 +116,7 @@ const dragTask = (boardId, evt) => {
   }
 
   .board__task-list {
-    @apply flex flex-col;
+    @apply max-h-73vh flex flex-col;
   }
 }
 </style>

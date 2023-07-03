@@ -91,12 +91,10 @@ const toggleFinishTask = (param) => isShowfinished.value = param
   }
 
   :deep(.el-scrollbar) {
-    @apply h-[95%];
+    @apply h-[95%] overflow-auto;
 
     .el-scrollbar__wrap {
-      @apply h-full;
-
-      overflow-y: hidden;
+      @apply h-full overflow-y-hidden;
     }
   }
 
@@ -104,8 +102,6 @@ const toggleFinishTask = (param) => isShowfinished.value = param
     @apply flex;
 
     .home__contain__board-list {
-      // @apply ;
-
       .list-group {
         @apply flex;
       }
