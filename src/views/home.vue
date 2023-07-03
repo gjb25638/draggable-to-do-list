@@ -5,7 +5,10 @@
         draggable to-do-list
       </div>
       <div class="home__header__option">
-        <option-btn />
+        <option-btn
+          :type="'toggle'"
+          @toggle-finish-item="toggleFinishTask"
+        />
       </div>
     </div>
     <el-scrollbar>
@@ -69,6 +72,10 @@ const deleteBoard = async (props) => {
 
 const { movedCalcIndex } = dragHandlerMixin()
 const dragBoard = (evt) => movedCalcIndex(evt.moved.newIndex, evt.moved.oldIndex, boardStore.getList, updateBoard)
+
+const taskStore = useTaskStore()
+const { isShowfinished } = storeToRefs(taskStore)
+const toggleFinishTask = (param) => isShowfinished.value = param
 </script>
 
 <style lang="scss" scoped>

@@ -13,8 +13,16 @@
 <script setup lang="ts">
 import CheckedIcon from '@/components/img/checked.vue'
 
+const props = defineProps({
+  isChecked: { type: Boolean, default: false }
+})
 const emit = defineEmits(['checkedChange'])
 const checked = ref(false)
+onMounted(() => {
+  nextTick(() => {
+    checked.value = props.isChecked
+  })
+})
 const change = () => {
   checked.value = !checked.value
   emit('checkedChange', checked.value)

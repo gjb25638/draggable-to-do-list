@@ -56,7 +56,7 @@ const closeEditPanel = () => {
   inputText.value = props.data.title
 }
 const editItem = async () => {
-  await emit('editItem', { id: props.data.id, title: inputText.value, index: props.data.index })
+  await emit('editItem', { id: props.data.id, title: inputText.value, finished: props.data.finished, index: props.data.index })
   showEditPanel.value = false
 }
 </script>

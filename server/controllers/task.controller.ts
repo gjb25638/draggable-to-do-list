@@ -24,7 +24,7 @@ export default class TaskController extends Controller implements IController {
   public async getListByBoardId(req: Request, res: Response) {
     const snapshot = await db.collection('board').doc(req.params.board_id).collection('task').get()
     const tasks = snapshot.docs.map(doc => {
-      return { id: doc.id, title: doc.data().title, index: doc.data().index }
+      return { id: doc.id, title: doc.data().title, finished: doc.data().finished, index: doc.data().index }
     })
     res.send(tasks)
   }

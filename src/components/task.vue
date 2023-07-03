@@ -1,10 +1,14 @@
 <template>
   <div
+    v-if="isShow"
     class="task"
     :class="{ checked }"
   >
     <div class="task__chk">
-      <Chk @checked-change="checkedChange" />
+      <Chk
+        :is-checked="checked"
+        @checked-change="checkedChange"
+      />
     </div>
     {{ taskData.index }}
     <edit-item-plate
@@ -30,9 +34,19 @@ const props = defineProps({
 })
 const emit = defineEmits(['deleteTask', 'updateTask'])
 const checked = ref(false)
+onMounted(() => {
+  nextTick(() => {
+    checked.value = props.taskData.finished
+  })
+})
+const taskStore = useTaskStore()
 const checkedChange = (param) => {
   checked.value = param
+  taskStore.updateTask(props.taskData.boardId, { id: props.taskData.id, title: props.taskData.title, finished: checked.value, index: props.taskData.index })
 }
+
+const { isShowfinished } = storeToRefs(taskStore)
+const isShow = computed(() => checked.value ? isShowfinished.value : true)
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +64,13 @@ const checkedChange = (param) => {
   }
 
   &.checked {
-    @apply bg-[#C0C0C0] line-through;
+    @apply bg-[#C0C0C0];
+
+    :deep(.editItemPlate) {
+      .title {
+        @apply line-through;
+      }
+    }
   }
 }
 </style>

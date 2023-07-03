@@ -4,11 +4,13 @@ interface Task {
   boardId: string,
   id: string,
   title: string,
+  finished: boolean,
   index: number
 }
 
 interface stateConfig {
   taskList: Array<Task>
+  isShowfinished: boolean
 }
 
 export const useTaskStore = defineStore('Task', {
@@ -18,6 +20,7 @@ export const useTaskStore = defineStore('Task', {
       // { boardId: '1', id: '2', title: '掃廁所' },
       // { boardId: '1', id: '3', title: '拖地板' }
     ],
+    isShowfinished: false
   }),
   getters: {
     getTasksByBoardId: (state) => (board_id) : Array<Task> => {

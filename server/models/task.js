@@ -1,7 +1,8 @@
 export class Task {
-  constructor(id, title, index) {
+  constructor(id, title, finished = false, index) {
     this.id = id
     this.title = title
+    this.finished = finished
     this.index = index
   }
   toString() {
@@ -15,11 +16,12 @@ export const taskConverter = {
     return {
       id: task.id,
       title: task.title,
+      finished: task.finished,
       index: task.index
     }
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options)
-    return new Task(data.id, data.title, data.index)
+    return new Task(data.id, data.title, data.finished, data.index)
   }
 }
