@@ -29,9 +29,9 @@ export default class TaskController extends Controller implements IController {
     res.send(tasks)
   }
   public async add(req: Request, res: Response) {
-    const { title, index } = req.body
+    const { title, finished, index } = req.body
     const newTaskRef = await db.collection('board').doc(req.params.board_id).collection('task').doc()
-    await newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title, index))
+    await newTaskRef.withConverter(taskConverter).set(new Task(newTaskRef.id, title, finished, index))
     res.send()
   }
   public async change(req: Request, res: Response) {

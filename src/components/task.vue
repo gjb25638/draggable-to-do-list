@@ -1,13 +1,13 @@
 <template>
   <div
-    v-if="isShow"
+    v-show="isShow"
     class="task"
-    :class="{ checked }"
+    :class="{ checked: taskData.finished }"
   >
     <div class="task__chk">
       <Chk
-        :is-checked="checked"
-        @checked-change="checkedChange"
+        :is-checked="taskData.finished"
+        @checked-change="(param) => $emit('checkedChange', { id: taskData.id, title: taskData.title, finished: param, index: taskData.index })"
       />
     </div>
     {{ taskData.index }}
@@ -29,24 +29,11 @@ import Chk from '@/components/checkbox.vue'
 import editItemPlate from '@/components/editItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 const props = defineProps({
+  isShow: { type: Boolean, default: true },
   taskData: { type: Object, default: () => ({ id: '1', title: '資源回收', index: -1 }) },
   taskIndex: { type: Number, default: -1 }
 })
-const emit = defineEmits(['deleteTask', 'updateTask'])
-const checked = ref(false)
-onMounted(() => {
-  nextTick(() => {
-    checked.value = props.taskData.finished
-  })
-})
-const taskStore = useTaskStore()
-const checkedChange = (param) => {
-  checked.value = param
-  taskStore.updateTask(props.taskData.boardId, { id: props.taskData.id, title: props.taskData.title, finished: checked.value, index: props.taskData.index })
-}
-
-const { isShowfinished } = storeToRefs(taskStore)
-const isShow = computed(() => checked.value ? isShowfinished.value : true)
+const emit = defineEmits(['deleteTask', 'updateTask', 'checkedChange'])
 </script>
 
 <style lang="scss" scoped>

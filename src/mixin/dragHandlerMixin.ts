@@ -37,7 +37,7 @@ export default function() {
     return
   }
   // addedCalcIndex just service task
-  const addedCalcIndex = <T extends { id: string, title: string, index: number }>(newIndex: number, el: T, boardId: string, list: T[], addFunc: Function, updateFunc: Function) => {
+  const addedCalcIndex = <T extends { id: string, title: string, finished: boolean, index: number }>(newIndex: number, el: T, boardId: string, list: T[], addFunc: Function, updateFunc: Function) => {
     if (!list || list.length < 0) return
 
     if (list.length > 0 && list.length > newIndex) {
@@ -48,7 +48,7 @@ export default function() {
         updateFunc(item)
       }
     }
-    addFunc({ title: el.title, index: newIndex })(boardId)
+    addFunc({ title: el.title, finished: el.finished, index: newIndex })(boardId)
     return
   }
   // addedCalcIndex just service task

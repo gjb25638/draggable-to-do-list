@@ -1,8 +1,8 @@
 <template>
   <div
     class="chk"
-    :class="{ checked }"
-    @click="change"
+    :class="{ checked: isChecked }"
+    @click="$emit('checkedChange', !isChecked)"
   >
     <div class="chk__border" />
     <div class="chk__circle" />
@@ -17,16 +17,6 @@ const props = defineProps({
   isChecked: { type: Boolean, default: false }
 })
 const emit = defineEmits(['checkedChange'])
-const checked = ref(false)
-onMounted(() => {
-  nextTick(() => {
-    checked.value = props.isChecked
-  })
-})
-const change = () => {
-  checked.value = !checked.value
-  emit('checkedChange', checked.value)
-}
 </script>
 
 <style lang="scss" scoped>

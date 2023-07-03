@@ -23,10 +23,12 @@
       >
         <template #item="{ element, index }">
           <task
+            :is-show="element.finished ? isShowfinished : true"
             :task-data="element"
             :task-index="index"
             @delete-task="(param) => deleteTask(param)(boardData.id)"
             @update-task="updateTask"
+            @checked-change="updateTask"
           />
         </template>
       </draggable>
@@ -34,7 +36,7 @@
     <div class="board__add-task-btn">
       <add-item-btn
         :item="'task'"
-        @add-item="(param) => addTask({ ...param, index: taskStore.getLength(boardData.id) })(boardData.id)"
+        @add-item="(param) => addTask({ ...param, finished: false, index: taskStore.getLength(boardData.id) })(boardData.id)"
       />
     </div>
   </div>
@@ -61,13 +63,14 @@ const props = defineProps({
 const emit = defineEmits(['updateBoard', 'deleteBoard'])
 
 const taskStore = useTaskStore()
+const { isShowfinished } = storeToRefs(taskStore)
 onMounted(() => {
   nextTick(() => {
     refreshTaskList(props.boardData.id)
   })
 })
 const addTask = (param) => async (boardId) => {
-  await taskStore.addTask(boardId, { title: param.title, index: param.index })
+  await taskStore.addTask(boardId, { title: param.title, finished: param.finished, index: param.index })
   refreshTaskList(boardId)
   if (param.clearInput) param.clearInput()
 }
@@ -97,7 +100,6 @@ const dragTask = (boardId, evt) => {
     removedCalcIndex(evt.removed.oldIndex, evt.removed.element, boardId, taskStore.getTasksByBoardId(boardId), deleteTask, updateTask)
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
