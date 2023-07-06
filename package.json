@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "serve": "nodemon server/app.ts -w server",
-    "start": "NODE_ENV=production ts-node src/server/app.ts",
+    "start": "NODE_ENV=production ts-node server/app.ts",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
