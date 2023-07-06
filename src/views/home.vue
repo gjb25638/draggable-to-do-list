@@ -18,7 +18,7 @@
             class="list-group"
             :list="boardStore.getList"
             group="board"
-            item-key="id"
+            item-key="index"
             @change="dragBoard"
           >
             <template #item="{ element, index }">

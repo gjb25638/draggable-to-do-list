@@ -19,7 +19,7 @@
           class="list-group"
           :list="taskStore.getTasksByBoardId(boardData.id)"
           group="task"
-          item-key="id"
+          item-key="index"
           @change="dragTask(boardData.id, $event)"
         >
           <template #item="{ element, index }">
