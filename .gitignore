@@ -24,6 +24,8 @@ pnpm-debug.log*
 *.sw?
 stats.html
 /package-lock.json
+.docker
+server/.pnpm-store
 # /public/mock
 
 # lock files
