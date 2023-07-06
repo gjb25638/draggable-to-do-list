@@ -52,3 +52,8 @@ rebuild: down build
 # Run terminal of the client container
 server:
 	docker-compose exec server /bin/sh
+
+remove-all-images:
+	docker rmi -f $(docker images -aq)
+
+rai: remove-all-images
