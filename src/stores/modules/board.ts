@@ -13,8 +13,8 @@ interface stateConfig {
 export const useBoardStore = defineStore('Board', {
   state: () : stateConfig => ({
     boardList: [
-      // { id: '1', title: '代辦' },
-      // { id: '2', title: '完成事項' }
+      // { id: '1', title: '代辦', index: 1 },
+      // { id: '2', title: '完成事項', index: 2 }
     ]
   }),
   getters: {

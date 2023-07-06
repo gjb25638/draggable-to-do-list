@@ -30,7 +30,7 @@ import editItemPlate from '@/components/editItemPlate.vue'
 import optionBtn from './optionBtn.vue'
 const props = defineProps({
   isShow: { type: Boolean, default: true },
-  taskData: { type: Object, default: () => ({ id: '1', title: '資源回收', index: -1 }) },
+  taskData: { type: Object, default: () => ({ id: '1', title: '資源回收', finished: false, index: -1 }) },
   taskIndex: { type: Number, default: -1 }
 })
 const emit = defineEmits(['deleteTask', 'updateTask', 'checkedChange'])

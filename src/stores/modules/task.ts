@@ -16,9 +16,9 @@ interface stateConfig {
 export const useTaskStore = defineStore('Task', {
   state: () : stateConfig => ({
     taskList: [
-      // { boardId: '1', id: '1', title: '資源回收' },
-      // { boardId: '1', id: '2', title: '掃廁所' },
-      // { boardId: '1', id: '3', title: '拖地板' }
+      // { boardId: '1', id: '1', title: '資源回收', finished: false, index: 1 },
+      // { boardId: '1', id: '2', title: '掃廁所', finished: false, index: 2 },
+      // { boardId: '1', id: '3', title: '拖地板', finished: false, index: 3 }
     ],
     isShowfinished: false
   }),
