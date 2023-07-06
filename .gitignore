@@ -28,11 +28,11 @@ error.log
 *.sw?
 stats.html
 /package-lock.json
-server/.pnpm-store
 # /public/mock
 
 # lock files
 pnpm-lock.yaml
+.pnpm-store
 .eslintrc-auto-import.json
 src/auto-imports.d.ts
 
