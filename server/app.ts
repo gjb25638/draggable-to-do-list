@@ -27,6 +27,10 @@ for (const route of router) {
   app.use(route.getPrefix(), route.getRouter())
 }
 
-ViteExpress.listen(app, 3000, () =>
-  console.log('Server is listening on port 3000...')
-)
+// for development env
+// ViteExpress.listen(app, 3000, () =>
+//   console.log('Server is listening on port 3000...')
+// )
+
+// for production env
+app.listen(3000, () => console.log('Server is listening on port 3000...'))

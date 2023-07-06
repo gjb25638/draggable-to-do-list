@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: ./.docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./dist:/var/www/client
+      - ./.docker/nginx/logs:/var/log/nginx
+    ports:
+      - 5678:5678
+    links:
+      - server
+  server:
+    restart: always
+    build:
+      context: ./.docker/server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/var/www/server
+    ports:
+      - 3000:3000
+        # client:
+        #   restart: always
+        #   build:
+        #     context: .docker/client
+        #     dockerfile: Dockerfile
+        #   volumes:
+        # - .:/var/www/client
+        # - ./server/null:/var/www/client

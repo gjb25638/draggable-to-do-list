@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "outDir": "./ts-dist",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+		"jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": ".",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true
+  },
+	"types": [
+		"node",
+	],
+	"typeRoots": ["./node_modules/@types/", "./types"],
+  "include": ["config/**/*.ts", "src/**/*", "types/**/*.d.ts"],
+  // "include": [
+  //   "config/**/*.ts", 
+  //   "types/**/*.d.ts", 
+  //   "src/**/*.ts", 
+  //   "src/**/*.d.ts" , 
+  //   "src/**/*.tsx", 
+  //   "src/**/*.vue",
+  //   "*.d.ts"
+  // ],
+  "exclude": ["dist", "node_modules"]
+}
