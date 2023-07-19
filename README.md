@@ -59,7 +59,7 @@ You need to open the google firestore service first,
 then go to the "project settings" -> "service account" of firestore to generate a new private key first, 
 a key file will be generated, 
 then add a default.json file under ./config/ and ./server/confing/ under the root directory of the project, 
-copy and paste the information in the key file into the default.json file
+copy and paste the information in the key file into the default.json file, 
 so that the backend can connect to the firestore to access the data
 
 ## Install pnpm
