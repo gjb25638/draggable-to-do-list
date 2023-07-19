@@ -18,26 +18,28 @@
 - Volar
 
 ## Directory structure
-┌── .docker           # docker file & nginx setting  
+```shell
+┌── .docker             # docker file & nginx setting  
 ├── config  
 ├── dist  
-├── server				    # back-end  
-│   ├── controllers		# controller  
+├── server				      # back-end  
+│   ├── controllers		  # controller  
 │   ├── middleware  
 │   ├── models  
-│   ├── repositories	# firestore access  
-│   ├── routes			  # backend router  
+│   ├── repositories	  # firestore access  
+│   ├── routes			    # backend router  
 │   └── utils  
-└── src					      # front-end  
-    ├── components		# components  
-    ├── config			  # api base url  
+└── src					        # front-end  
+    ├── components		  # components  
+    ├── config			    # api base url  
     ├── mixin  
     ├── stores  
-    │   ├── api			  # api  
-    │   └── modules		# pinia store  
+    │   ├── api			    # api  
+    │   └── modules		  # pinia store  
     ├── utils  
-	  │	  └── request.js	   # get, post, put, patch, delete  
-    └── views			     # page  
+	  │	  └── request.js  # get, post, put, patch, delete  
+    └── views			      # page  
+```
 
 ## Feature
 - The outer layer is called board, and the inner layer is called task
