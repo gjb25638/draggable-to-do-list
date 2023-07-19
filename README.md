@@ -1,36 +1,48 @@
 # draggable-to-do-list
+## The framework used by the project
+- front-end build tool: vite
+- front-end: vue3
+- back-end: express
+- db: google firestore
 
-可拖拉雙層to-do-list
-
-# 環境需求
+## Environmental requirements
 - Node 18.12.1
 - Git
 - pnpm
 - vscode
 - Volar
 
-# 安裝 pnpm
+## Google firestore connection settings
+You need to open the google firestore service first, 
+then go to the project settings/service account of firestore to generate a new private key first, 
+a key file will be generated, 
+and then add a .env file in the root directory of this project, 
+put the key file in the Fill in the information in the .env file, 
+.env key name can refer to the settings in server/db.ts in the project, 
+so that the backend can connect to the firestore to access the data
+
+## Install pnpm
 ```PowerShell
 npm i -g pnpm
 ```
 
-# 安裝 node 依賴模組
+## Install node dependency module
 ```PowerShell
 pnpm i
 ```
 
-# 開發環境
+## Development environment
 ```PowerShell
 git checkout master
 pnpm serve
 ```
 
-# 輸出生產
+## Output production
 ```PowerShell
 pnpm build
 ```
 
-# docker 環境
+## Docker environment
 ```PowerShell
 git checkout add_docker
 make up
