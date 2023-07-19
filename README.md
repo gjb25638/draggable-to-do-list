@@ -1,8 +1,8 @@
 # draggable-to-do-list
 ## The framework used by the project
-- front-end build tool: vite
-- front-end: vue3
-- back-end: express
+- frontend build tool: vite
+- frontend: vue3
+- backend: express
 - db: google firestore
 
 ## Environmental requirements
@@ -18,7 +18,7 @@ then go to the project settings/service account of firestore to generate a new p
 a key file will be generated, 
 and then add a .env file in the root directory of this project, 
 put the key file in the Fill in the information in the .env file, 
-.env key name can refer to the settings in server/db.ts in the project, 
+for key name settings in .env, please refer to the settings in .env.sample under the project root directory, 
 so that the backend can connect to the firestore to access the data
 
 ## Install pnpm
