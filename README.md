@@ -2,8 +2,13 @@
 ## The framework used by the project
 - frontend build tool: vite
 - frontend: vue3
+- vue repository and state management: pinia
+- css preprocessor: SCSS
+- UI component library: element-plus
+- css framework: unocss
+- draggable module: vuedraggable
 - backend: express
-- db: google firestore
+- data storage: google firestore
 
 ## Environmental requirements
 - Node 18.12.1
@@ -33,6 +38,18 @@
     ├── utils  
 	│	└── request.js	   # get, post, put, patch, delete  
     └── views			     # page  
+
+## Feature
+- The outer layer is called board, and the inner layer is called task
+- Drag and drop between boards to swap positions
+- In addition to dragging and swapping positions between tasks, you can also drag and drop from the original board to other boards
+- Add board or task
+- Rename board or task
+- delete board or task
+- When the checkbox of the task is pressed, the task can be eliminated, indicating that the task has been completed
+- Can show or hide completed tasks
+- Press the checkbox of the completed task to restore the task to the working state
+- Too many boards or tasks will use scrollbar to hide
 
 ## Google firestore connection settings
 You need to open the google firestore service first, 
