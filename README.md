@@ -48,7 +48,7 @@
 - In addition to dragging and swapping positions between tasks, you can also drag and drop from the original board to other boards
 - Add board or task
 - Rename board or task
-- delete board or task
+- Delete board or task
 - When the checkbox of the task is pressed, the task can be eliminated, indicating that the task has been completed
 - Can show or hide completed tasks
 - Press the checkbox of the completed task to restore the task to the working state
@@ -58,9 +58,8 @@
 You need to open the google firestore service first, 
 then go to the "project settings" -> "service account" of firestore to generate a new private key first, 
 a key file will be generated, 
-and then add a .env file in the root directory of this project, 
-put the key file in the Fill in the information in the .env file, 
-for key name settings in .env, please refer to the settings in .env.sample under the project root directory, 
+then add a default.json file under ./config and ./server/confing under the root directory of the project, 
+copy and paste the information in the key file into the default.json file
 so that the backend can connect to the firestore to access the data
 
 ## Install pnpm
