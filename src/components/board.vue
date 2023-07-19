@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <div class="board__header">
-      {{ boardData.index }}
+      <!-- {{ boardData.index }} -->
       <edit-item-plate
         :data="boardData"
         @edit-item="(param) => $emit('updateBoard', param)"

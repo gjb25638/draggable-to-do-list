@@ -10,7 +10,7 @@
         @checked-change="(param) => $emit('checkedChange', { id: taskData.id, title: taskData.title, finished: param, index: taskData.index })"
       />
     </div>
-    {{ taskData.index }}
+    <!-- {{ taskData.index }} -->
     <edit-item-plate
       :data="taskData"
       @edit-item="(param) => $emit('updateTask', param)"
