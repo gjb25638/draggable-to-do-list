@@ -13,26 +13,26 @@
 - Volar
 
 ## Directory structure
-┌── .docker           # docker file & nginx setting
-├── config
-├── dist
-├── server				    # back-end
-│   ├── controllers		# controller
-│   ├── middleware
-│   ├── models
-│   ├── repositories	# firestore access
-│   ├── routes			  # backend router
-│   └── utils
-└── src					      # front-end
-    ├── components		# components
-    ├── config			  # api base url
-    ├── mixin
-    ├── stores
-    │   ├── api			  # api
-    │   └── modules		# pinia store
-    ├── utils
-	│	└── request.js	   # get, post, put, patch, delete
-    └── views			     # page
+┌── .docker           # docker file & nginx setting  
+├── config  
+├── dist  
+├── server				    # back-end  
+│   ├── controllers		# controller  
+│   ├── middleware  
+│   ├── models  
+│   ├── repositories	# firestore access  
+│   ├── routes			  # backend router  
+│   └── utils  
+└── src					      # front-end  
+    ├── components		# components  
+    ├── config			  # api base url  
+    ├── mixin  
+    ├── stores  
+    │   ├── api			  # api  
+    │   └── modules		# pinia store  
+    ├── utils  
+	│	└── request.js	   # get, post, put, patch, delete  
+    └── views			     # page  
 
 ## Google firestore connection settings
 You need to open the google firestore service first, 
