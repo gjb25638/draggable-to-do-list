@@ -19,7 +19,8 @@
 
 ## Directory structure
 ```shell
-┌── .docker             # docker file & nginx setting
+.
+├── .docker             # docker file & nginx setting
 ├── config
 ├── dist
 ├── server              # back-end
